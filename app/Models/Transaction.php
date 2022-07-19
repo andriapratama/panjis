@@ -12,4 +12,9 @@ class Transaction extends Model
     protected $table = "transactions";
     protected $primaryKey = "id";
     protected $fillable = ["user_id", "status", "total"];
+
+    public function transaction_detail()
+    {
+        return $this->hasMany(TransactionDetail::class, "transaction_id", "id");
+    }
 }

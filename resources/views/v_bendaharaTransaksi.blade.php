@@ -2,7 +2,7 @@
 @section('title', 'Bendahara')
 
 @section('content')
-    <div class="bendahara-transaksi__component">
+    <div class="bendahara-transaksi__container">
         <h3>Pemasukan</h3>
 
         <div id="table-transaksi"></div>

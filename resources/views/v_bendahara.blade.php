@@ -2,7 +2,7 @@
 @section('title', 'Bendahara')
 
 @section('content')
-	<div class="bendahara__component">
+	<div class="bendahara__container">
 		<div class="bendahara__button">
 			<a href="/bendahara/new/in" class="bendahara__button-primary">Pemasukan</a>
 			<a href="/bendahara/new/out" class="bendahara__button-primary">Pengeluaran</a>
@@ -50,7 +50,7 @@
 									'<td><div class="status-in-column">Pemasukan</div></td>'+
 									'<td>'+ numberFormat.format(value.total) +'</td>'+
 									'<td>'+
-										'<button class="bendahara__button-table-secondary">Detail</button>'+
+										'<a href="/bendahara/detail/'+ value.id +'" class="bendahara__button-table-secondary">Detail</a>'+
 									'</td>'+
 								'</tr>'
 							);
@@ -62,7 +62,7 @@
 									'<td><div class="status-out-column">Pengeluaran</div></td>'+
 									'<td>'+ numberFormat.format(value.total) +'</td>'+
 									'<td>'+
-										'<button class="bendahara__button-table-secondary">Detail</button>'+
+										'<a href="/bendahara/detail/'+ value.id +'" class="bendahara__button-table-secondary">Detail</a>'+
 									'</td>'+
 								'</tr>'
 							);

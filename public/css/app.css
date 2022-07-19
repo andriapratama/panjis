@@ -4,8 +4,13 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-.bendahara__component,
-.bendahara-transaksi__component {
+p {
+    margin: 0;
+}
+
+.bendahara__container,
+.bendahara-transaksi__container,
+.bendahara-detail__container {
     width: 100%;
     background: white;
     padding: 10px 15px 10px 15px;
@@ -22,7 +27,7 @@ input::-webkit-inner-spin-button {
 
 .bendahara__button-primary {
     padding: 5px 10px 5px 10px;
-    background-color: dodgerblue;
+    background-color: #007bff;
     border-radius: 5px;
     margin-right: 5px;
     color: white;
@@ -71,11 +76,14 @@ input::-webkit-inner-spin-button {
     border: none;
 }
 
+.bendahara__button-primary:hover,
 .bendahara__button-table-secondary:hover,
 .bendahara-transaksi__button-primary:hover,
 .bendahara-transaksi__button-success:hover,
 .bendahara-transaksi__button-table-danger:hover {
     opacity: 80%;
+    color: white;
+    text-decoration: none;
 }
 
 .bendahara-transaksi__input-text {
@@ -96,6 +104,19 @@ input::-webkit-inner-spin-button {
     background-color: rgb(210, 210, 210);
     border-radius: 5px;
     font-size: 18px;
+}
+
+.bendahara-detail__head {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.bendahara-detail__head-group {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
 }
 
 .flex-align-center {

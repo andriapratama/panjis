@@ -23,6 +23,11 @@ class BendaharaController extends Controller
         return view('v_bendaharaTransaksi', ['status' => $status]);
     }
 
+    public function detail($id)
+    {
+        return view('v_bendaharaDetail', ['id' => $id]);
+    }
+
     public function store(Request $request)
     {
         $transaction = Transaction::create([
@@ -53,6 +58,17 @@ class BendaharaController extends Controller
             'status'    => 'true',
             'message'   => 'Success to get data transaction',
             'data'      => $transaction
+        ], 200);
+    }
+
+    public function getOneData($id)
+    {
+        $data = Transaction::with('transaction_detail')->where("id", '=', $id)->first();
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'Success to get one data transaction with transaction detail',
+            'data'      => $data
         ], 200);
     }
 }
