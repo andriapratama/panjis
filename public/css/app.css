@@ -102,3 +102,25 @@ input::-webkit-inner-spin-button {
     display: flex;
     align-items: center;
 }
+
+.status-in-column {
+    width: 100px;
+    border-radius: 10px;
+    padding: 3px 0 3px 0;
+    background-color: #28a745;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-out-column {
+    width: 100px;
+    border-radius: 10px;
+    padding: 3px 0 3px 0;
+    background-color: #dc3545;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

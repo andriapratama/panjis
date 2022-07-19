@@ -60,6 +60,7 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 	//Bendahara
 	Route::get('/bendahara', [BendaharaController::class, 'index'])->name('bendahara');
 	Route::get('/bendahara/new/{status}', [BendaharaController::class, 'new'])->name('bendahara.new');
+	Route::get('/transaction', [BendaharaController::class, 'getData']);
 
 
 	//Sekretaris

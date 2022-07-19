@@ -21,6 +21,10 @@
         let transactionList = [];
         let status = '{{$status}}';
         let total = 0;
+        let userId = '{{ Auth::user()->id }}';
+        let token = null;
+
+        console.log(name);
 
         $("document").ready(function() {
             renderTableTransaction();
@@ -141,6 +145,7 @@
 
         function handleSave() {
             const formData = new FormData();
+            formData.append("userId", userId);
             formData.append("status", status);
             formData.append("total", total);
 
@@ -152,17 +157,14 @@
             $.ajax({
                 type: 'POST',
                 url: '/api/transaction',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: function(result) {
-                    const tableBody = $('#table-body');
-                    const tableBodyTotal = $('#table-body-total');
-                    
-                    tableBody.html("");
-                    tableBodyTotal.html("");
-
-                    transactionList = [];
+                    window.location.href = "/bendahara";
                 }
             })
         }

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Transaction;
-use App\TransactionDetail;
+use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 
 class BendaharaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['store']);
     }
 
     public function index()
@@ -26,7 +26,7 @@ class BendaharaController extends Controller
     public function store(Request $request)
     {
         $transaction = Transaction::create([
-            'user_id'   => 1,
+            'user_id'   => $request['userId'],
             'status'    => $request['status'],
             'total'     => $request['total'],
         ]);
@@ -43,5 +43,16 @@ class BendaharaController extends Controller
             'status'    => 'true',
             'message'   => 'success to store transaction and transaction detail',
         ], 201);
+    }
+
+    public function getData()
+    {
+        $transaction = Transaction::orderBy("created_at", "DESC")->get();
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'Success to get data transaction',
+            'data'      => $transaction
+        ], 200);
     }
 }

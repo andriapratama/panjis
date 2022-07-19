@@ -18,44 +18,58 @@
 					<th>Aksi</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>17-07-2022</td>
-					<td>Pemasukan</td>
-					<td>Rp 250.000</td>
-					<td>
-						<button class="bendahara__button-table-secondary">Detail</button>
-					</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>17-07-2022</td>
-					<td>Pengeluaran</td>
-					<td>Rp 250.000</td>
-					<td>
-						<button class="bendahara__button-table-secondary">Detail</button>
-					</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>17-07-2022</td>
-					<td>Pengeluaran</td>
-					<td>Rp 250.000</td>
-					<td>
-						<button class="bendahara__button-table-secondary">Detail</button>
-					</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td>17-07-2022</td>
-					<td>Pemasukan</td>
-					<td>Rp 250.000</td>
-					<td>
-						<button class="bendahara__button-table-secondary">Detail</button>
-					</td>
-				</tr>
-			</tbody>
+			<tbody id="table-body"></tbody>
 		</table>
 	</div>
+
+    @include('js/javascript')
+	<script type="text/javascript">
+		let numberFormat = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR"});
+
+		$("document").ready(function() {
+			showTransactionList();
+		});
+
+		function showTransactionList() {
+			$.ajax({
+				type: "GET",
+				url: "/transaction",
+				success: function(result) {
+					console.log(result);
+					const element = $('#table-body');
+					element.html("");
+					result.data.forEach((value, index) => {
+						const date = new Date(value.created_at);
+						const dateFormat = new Intl.DateTimeFormat(['ban', 'id']).format(date);
+
+						if (value.status === "in") {
+							element.append(
+								'<tr>'+
+									'<td>'+ (index+1) +'</td>'+
+									'<td>'+ dateFormat +'</td>'+
+									'<td><div class="status-in-column">Pemasukan</div></td>'+
+									'<td>'+ numberFormat.format(value.total) +'</td>'+
+									'<td>'+
+										'<button class="bendahara__button-table-secondary">Detail</button>'+
+									'</td>'+
+								'</tr>'
+							);
+						} else if (value.status === "out") {
+							element.append(
+								'<tr>'+
+									'<td>'+ (index+1) +'</td>'+
+									'<td>'+ dateFormat +'</td>'+
+									'<td><div class="status-out-column">Pengeluaran</div></td>'+
+									'<td>'+ numberFormat.format(value.total) +'</td>'+
+									'<td>'+
+										'<button class="bendahara__button-table-secondary">Detail</button>'+
+									'</td>'+
+								'</tr>'
+							);
+						}
+					});
+				}
+			});
+		}
+	</script>
 @endsection
