@@ -14,10 +14,10 @@ class CreateTransactionDetailsTable extends Migration
     public function up()
     {
         Schema::create('transaction_details', function (Blueprint $table) {
-            $table->id();
-            $table->integer('transaction_id');
+            $table->increments('id');
+            $table->integer('transaction_id')->unsigned();
             $table->string('name');
-            $table->integer('total');
+            $table->integer('sub_total');
 
             $table->foreign('transaction_id')->references('id')->on('transactions');
             $table->timestamps();

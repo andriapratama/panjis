@@ -1,0 +1,104 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.bendahara__component,
+.bendahara-transaksi__component {
+    width: 100%;
+    background: white;
+    padding: 10px 15px 10px 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.bendahara__button,
+.bendahara-transaksi__button {
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.bendahara__button-primary {
+    padding: 5px 10px 5px 10px;
+    background-color: dodgerblue;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: white;
+    border: none;
+}
+
+.bendahara__button-table-secondary {
+    padding: 3px 8px 3px 8px;
+    background-color: #6c757d;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: white;
+    border: none;
+}
+
+.bendahara-transaksi__button-primary {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    background-color: #007bff;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+.bendahara-transaksi__button-success {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    background-color: #28a745;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+.bendahara-transaksi__button-table-danger {
+    padding: 3px 8px 3px 8px;
+    background-color: #dc3545;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: white;
+    border: none;
+}
+
+.bendahara__button-table-secondary:hover,
+.bendahara-transaksi__button-primary:hover,
+.bendahara-transaksi__button-success:hover,
+.bendahara-transaksi__button-table-danger:hover {
+    opacity: 80%;
+}
+
+.bendahara-transaksi__input-text {
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+}
+
+.bendahara-transaksi__input-number {
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    appearance: none;
+}
+
+.bendahara-transaksi__rp {
+    padding: 5px;
+    background-color: rgb(210, 210, 210);
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.flex-align-center {
+    display: flex;
+    align-items: center;
+}

@@ -14,10 +14,10 @@ class CreateTransactionsTable extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->enum('status', ['in', 'out']);
-
+            $table->integer('total');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

@@ -10,7 +10,7 @@ class AnggotaModel extends Model
 {
 	public function allData()
     {
-    	return DB::table('tbl_anggota')->get();
+    	return DB::table('users')->get();
     }
 
     public function detailData($id_anggota)
