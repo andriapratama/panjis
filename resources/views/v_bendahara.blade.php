@@ -13,6 +13,7 @@
 				<tr>
 					<th>No</th>
 					<th>Tanggal</th>
+					<th>Judul</th>
 					<th>Status</th>
 					<th>Total</th>
 					<th>Aksi</th>
@@ -35,7 +36,6 @@
 				type: "GET",
 				url: "/transaction",
 				success: function(result) {
-					console.log(result);
 					const element = $('#table-body');
 					element.html("");
 					result.data.forEach((value, index) => {
@@ -47,6 +47,7 @@
 								'<tr>'+
 									'<td>'+ (index+1) +'</td>'+
 									'<td>'+ dateFormat +'</td>'+
+									'<td>'+ value.title +'</td>'+
 									'<td><div class="status-in-column">Pemasukan</div></td>'+
 									'<td>'+ numberFormat.format(value.total) +'</td>'+
 									'<td>'+
@@ -59,6 +60,7 @@
 								'<tr>'+
 									'<td>'+ (index+1) +'</td>'+
 									'<td>'+ dateFormat +'</td>'+
+									'<td>'+ value.title +'</td>'+
 									'<td><div class="status-out-column">Pengeluaran</div></td>'+
 									'<td>'+ numberFormat.format(value.total) +'</td>'+
 									'<td>'+

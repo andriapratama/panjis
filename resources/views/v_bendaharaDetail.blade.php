@@ -4,7 +4,12 @@
 @section('content')
     <div class="bendahara-detail__container">
         <div class="bendahara-detail__head">
-            <div class="bendahara-detail__head-group"">
+            <div class="bendahara-detail__head-group">
+                <p style="width: 70px;">Judul</p>
+                <span id="title"></span>
+            </div>
+
+            <div class="bendahara-detail__head-group">
                 <p style="width: 70px;">Tanggal</p>
                 <span id="date"></span>
             </div>
@@ -47,6 +52,7 @@
                 url: '/transaction/' + transactionId,
                 success: function(result) {
                     const date = new Date(result.data.created_at);
+                    $('#title').html(": " + result.data.title);
                     $('#date').html(": " + new Intl.DateTimeFormat(['ban', 'id']).format(date));
                     if (result.data.status === "in") {
                         $('#status').html(": Pemasukan"); 
@@ -66,8 +72,6 @@
                             '</tr>'
                         );
                     })
-
-                    console.log(result);
                 }
             });
         }

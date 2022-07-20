@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BendaharaController;
+use App\Http\Controllers\PublikasiController;
 
 
 /*
@@ -23,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Auth::routes();
 
 Route::post('/transaction', [BendaharaController::class, 'store']);
+
+Route::post('/gallery', [PublikasiController::class, 'store']);

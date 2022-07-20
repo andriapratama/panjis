@@ -32,6 +32,7 @@ class BendaharaController extends Controller
     {
         $transaction = Transaction::create([
             'user_id'   => $request['userId'],
+            'title'     => $request['title'],
             'status'    => $request['status'],
             'total'     => $request['total'],
         ]);

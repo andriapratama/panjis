@@ -10,10 +10,11 @@ p {
 
 .bendahara__container,
 .bendahara-transaksi__container,
-.bendahara-detail__container {
+.bendahara-detail__container,
+.publikasi-new__container {
     width: 100%;
     background: white;
-    padding: 10px 15px 10px 15px;
+    padding: 20px;
     border: 1px solid black;
     border-radius: 5px;
 }
@@ -25,7 +26,8 @@ p {
     margin-bottom: 20px;
 }
 
-.bendahara__button-primary {
+.bendahara__button-primary,
+.publikasi__button-primary {
     padding: 5px 10px 5px 10px;
     background-color: #007bff;
     border-radius: 5px;
@@ -76,6 +78,8 @@ p {
     border: none;
 }
 
+.publikasi__button-primary:hover,
+.publikasi-new__button-success:hover,
 .bendahara__button-primary:hover,
 .bendahara__button-table-secondary:hover,
 .bendahara-transaksi__button-primary:hover,
@@ -86,7 +90,8 @@ p {
     text-decoration: none;
 }
 
-.bendahara-transaksi__input-text {
+.bendahara-transaksi__input-text,
+.publikasi-new__input-text {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -119,6 +124,152 @@ p {
     margin-bottom: 10px;
 }
 
+.publikasi__container {
+    width: 100%;
+    padding: 10px 15px 10px 15px;
+}
+
+.publikasi__head {
+    margin-bottom: 30px;
+}
+
+.publikasi__body {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.publikasi__card {
+    width: 350px;
+    height: 370px;
+    border: #000000 solid 1px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-bottom: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.publikasi__card:hover img {
+    transform: scale(1.1);
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    transition: 500ms ease-out;
+    cursor: pointer;
+}
+
+.publikasi__image-container {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.publikasi__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: 500ms ease-in;
+    cursor: pointer;
+}
+
+.publikasi__card-body {
+    width: 100%;
+    padding: 15px;
+}
+
+.publikasi__card-desc {
+    text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    cursor: pointer;
+}
+
+.publikasi__card-desc:hover {
+    text-decoration: underline;
+}
+
+.publikasi-new__textarea {
+    width: 100%;
+    height: 60px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    border: 2px solid #000000;
+    margin: 0;
+}
+
+.publikasi-new__input-file {
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    border: 2px solid #000000;
+}
+
+.publikasi-new__button-success {
+    background-color: #28a745;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+}
+
+.publikasi-new__preview-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.publikasi-new__preview-image img {
+    width: auto;
+    height: 300px;
+}
+
+.publikasi-detail__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.publikasi-detail__card {
+    width: 800px;
+    border-radius: 10px;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+}
+
+.publikasi-detail__image {
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.publikasi-detail__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.publikasi-detail__title {
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
 .flex-align-center {
     display: flex;
     align-items: center;
@@ -144,4 +295,9 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.error {
+    color: red;
+    font-size: 15px;
 }

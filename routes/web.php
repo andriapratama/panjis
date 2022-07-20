@@ -74,6 +74,10 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 
 	//Publikasi
 	Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi');
+	Route::get('/publikasi/new', [PublikasiController::class, 'new'])->name('publikasi.new');
+	Route::get('/publikasi/detail/{id}', [PublikasiController::class, 'detail'])->name('publikasi.detail');
+	Route::get('/gallery', [PublikasiController::class, 'getData']);
+	Route::get('/gallery/{id}', [PublikasiController::class, 'getOneData']);
 
 
 	Route::get('/sekretaris', [SekretarisController::class, 'index'])->name('sekretaris');
