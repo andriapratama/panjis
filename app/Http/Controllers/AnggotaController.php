@@ -3,110 +3,65 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AnggotaModel;
+use App\Models\Member;
 
 class AnggotaController extends Controller
 {
 	public function __construct()
 	{
-		$this->AnggotaModel = new AnggotaModel();
-		$this->middleware('auth');
+		$this->middleware('auth')->except(['store']);
 	}
-
 
     public function index()
     {
-    	$data = [
-    		'anggota' => $this->AnggotaModel->allData(),
-    	];
-    	return view('v_anggota', $data);
+    	return view('v_anggota');
     }
 
-    public function detail($id_anggota)
-    {
-    	if (!$this->AnggotaModel->detailData($id_anggota)) {
-    		abort(404);
-    	}
-    	$data = [
-    		'anggota' => $this->AnggotaModel->detailData($id_anggota),
-    	];
-    	return view('v_detailanggota', $data);
-    }
+	public function new()
+	{
+		return view('v_anggotaNew');
+	}
 
-    public function add()
-    {
-    	return view('v_addanggota');
-    }
+	public function detail($id)
+	{
+		return view('v_anggotaDetail', ['id' => $id]);
+	}
 
-    public function insert()
-    {
-    	Request()->validate([
-        	'nik' => 'required|unique:tbl_anggota,nik|min:5|max:17',
-        	'nama_anggota' => 'required',
-        	'alamat' => 'required',
-       		'no_hp' => 'required',
-    	], [
-    		'nik.required' => 'Wajib Diisi',
-    		'nik.unique' => 'NIK ini sudah ada',
-    		'nik.min' => 'Minimal 5 karakter',
-    		'nik.max' => 'Maksimal 17 karakter',
-    		'nama_anggota.required' => 'Wajib Diisi',
-    		'alamat.required' => 'Wajib Diisi',
-    		'no_hp.required' => 'Wajib Diisi',
-    	]);
+	public function store(Request $request)
+	{
+		Member::create([
+			'nik'			=> (int)$request['nik'],
+			'full_name'		=> $request['name'],
+			'address'		=> $request['address'],
+			'phone_number'	=> $request['phone'],
+			'gender'		=> $request['gender']
+		]);
 
-    	$data =[
-    		'nik' => Request()->nik,
-    		'nama_anggota' => Request()->nama_anggota,
-    		'alamat' => Request()->alamat,
-    		'no_hp' => Request()->no_hp,
-    	];
+		return response()->json([
+			'status'	=> 'true',
+			'message'	=> 'Success to store member data',
+		], 201);
+	}
 
-    	$this->AnggotaModel->addData($data);
-    	return redirect()->route('anggota')->with('pesan', 'Data berhasil ditambahkan');
-    }
+	public function getData()
+	{
+		$data = Member::orderBy('created_at', 'DESC')->get();
 
-     public function edit($id_anggota)
-    {
-    	if (!$this->AnggotaModel->detailData($id_anggota)) {
-    		abort(404);
-    	}
-    	$data = [
-    		'anggota' => $this->AnggotaModel->detailData($id_anggota),
-    	];
-    	return view('v_editanggota', $data);
-    }
+		return response()->json([
+			'status'	=> 'true',
+			'message'	=> 'Success to get member data',
+			'data'		=> $data
+		], 200);
+	}
 
-    public function update($id_anggota)
-    {
-    	Request()->validate([
-        	'nik' => 'required|unique:tbl_anggota,nik|min:5|max:17',
-        	'nama_anggota' => 'required',
-        	'alamat' => 'required',
-       		'no_hp' => 'required',
-    	], [
-    		'nik.required' => 'Wajib Diisi',
-    		'nik.min' => 'Minimal 5 karakter',
-    		'nik.max' => 'Maksimal 17 karakter',
-    		'nama_anggota.required' => 'Wajib Diisi',
-    		'alamat.required' => 'Wajib Diisi',
-    		'no_hp.required' => 'Wajib Diisi',
-    	]);
-	    	return redirect()->route('anggota')->with('pesan', 'Data berhasil diperbarui');
-    	
-    }
+	public function getOneData($id)
+	{
+		$data = Member::where('id', '=', $id)->first();
 
-    public function delete($id_anggota)
-    {
-    	//Hapus Foto
-    	$anggota = $this->AnggotaModel->detailData($id_anggota);
-    	if ($anggota->foto_anggota <> "") {
-    		unlink(public_path('foto_anggota') . '/' . $anggota->foto_anggota);
-    	}
-
-    	$this->AnggotaModel->deleteData($id_anggota);
-    	return redirect()->route('anggota')->with('pesan', 'Data berhasil dihapus');
-    }
-
-
+		return response()->json([
+			'status'	=> 'true',
+			'message'	=> 'success get one member data by id',
+			'data'		=> $data
+		], 200);
+	}
 }

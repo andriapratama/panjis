@@ -50,12 +50,10 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 
 	//Anggota
 	Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota');
-	Route::get('/anggota/detail/{id_anggota}', [AnggotaController::class, 'detail']);
-	Route::get('/anggota/add', [AnggotaController::class, 'add']);
-	Route::post('/anggota/insert', [AnggotaController::class, 'insert']);
-	Route::get('/anggota/edit/{id_anggota}', [AnggotaController::class, 'edit']);
-	Route::post('/anggota/update/{id_anggota}', [AnggotaController::class, 'update']);
-	Route::get('/anggota/delete/{id_anggota}', [AnggotaController::class, 'delete']);
+	Route::get('/anggota/new', [AnggotaController::class, 'new'])->name('anggota.new');
+	Route::get('/anggota/detail/{id}', [AnggotaController::class, 'detail'])->name('anggota.detail');
+	Route::get('/member', [AnggotaController::class, 'getData']);
+	Route::get('/member/{id}', [AnggotaController::class, 'getOneData']);
 
 	//Bendahara
 	Route::get('/bendahara', [BendaharaController::class, 'index'])->name('bendahara');

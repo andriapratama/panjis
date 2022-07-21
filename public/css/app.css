@@ -11,7 +11,9 @@ p {
 .bendahara__container,
 .bendahara-transaksi__container,
 .bendahara-detail__container,
-.publikasi-new__container {
+.publikasi-new__container,
+.anggota__container,
+.anggota-new__container {
     width: 100%;
     background: white;
     padding: 20px;
@@ -20,14 +22,16 @@ p {
 }
 
 .bendahara__button,
-.bendahara-transaksi__button {
+.bendahara-transaksi__button,
+.anggota__head {
     width: 100%;
     display: flex;
     margin-bottom: 20px;
 }
 
 .bendahara__button-primary,
-.publikasi__button-primary {
+.publikasi__button-primary,
+.anggota__button-primary {
     padding: 5px 10px 5px 10px;
     background-color: #007bff;
     border-radius: 5px;
@@ -36,7 +40,8 @@ p {
     border: none;
 }
 
-.bendahara__button-table-secondary {
+.bendahara__button-table-secondary,
+.anggota__table-button-secondary {
     padding: 3px 8px 3px 8px;
     background-color: #6c757d;
     border-radius: 5px;
@@ -69,7 +74,8 @@ p {
     font-size: 20px;
 }
 
-.bendahara-transaksi__button-table-danger {
+.bendahara-transaksi__button-table-danger,
+.anggota__table-button-danger {
     padding: 3px 8px 3px 8px;
     background-color: #dc3545;
     border-radius: 5px;
@@ -78,6 +84,20 @@ p {
     border: none;
 }
 
+.anggota__table-button-success {
+    padding: 3px 8px 3px 8px;
+    background-color: #28a745;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: white;
+    border: none;
+}
+
+.anggota-new__button-success:hover,
+.anggota__button-primary:hover,
+.anggota__table-button-danger:hover,
+.anggota__table-button-secondary:hover,
+.anggota__table-button-success:hover,
 .publikasi__button-primary:hover,
 .publikasi-new__button-success:hover,
 .bendahara__button-primary:hover,
@@ -91,10 +111,20 @@ p {
 }
 
 .bendahara-transaksi__input-text,
-.publikasi-new__input-text {
+.publikasi-new__input-text,
+.anggota-new__input-text {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
+    border: 2px solid #000000;
+}
+
+.anggota-new__input-select {
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    border: 2px solid #000000;
+    cursor: pointer;
 }
 
 .bendahara-transaksi__input-number {
@@ -216,7 +246,8 @@ p {
     border: 2px solid #000000;
 }
 
-.publikasi-new__button-success {
+.publikasi-new__button-success,
+.anggota-new__button-success {
     background-color: #28a745;
     padding: 5px 15px 5px 15px;
     border-radius: 5px;
@@ -236,13 +267,15 @@ p {
     height: 300px;
 }
 
-.publikasi-detail__container {
+.publikasi-detail__container,
+.anggota-detail__container {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.publikasi-detail__card {
+.publikasi-detail__card,
+.anggota-detail__card {
     width: 800px;
     border-radius: 10px;
     padding: 30px;
@@ -268,6 +301,15 @@ p {
     text-align: center;
     font-size: 30px;
     margin-bottom: 30px;
+}
+
+.anggota-detail__group {
+    border-bottom: 2px solid black;
+    margin-bottom: 20px;
+}
+
+.anggota-detail__group p {
+    color: #6c757d;
 }
 
 .flex-align-center {

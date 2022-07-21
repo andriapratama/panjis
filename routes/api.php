@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BendaharaController;
 use App\Http\Controllers\PublikasiController;
+use App\Http\Controllers\AnggotaController;
 
 
 /*
@@ -26,3 +27,5 @@ Auth::routes();
 Route::post('/transaction', [BendaharaController::class, 'store']);
 
 Route::post('/gallery', [PublikasiController::class, 'store']);
+
+Route::post('/member', [AnggotaController::class, 'store']);

@@ -2,70 +2,58 @@
 @section('title', 'Anggota')
 
 @section('content')
-	<a href="/anggota/add" class="btn btn-primary btn-sm">Tambah</a> <br>
-	<br>
+	<div class="anggota__container">
+		<div class="anggota__head">
+			<a class="anggota__button-primary" href="/anggota/new">Tambah</a>
+		</div>
 
-	@if (session('pesan'))
-	<div class="alert alert-success alert-dismissible">
-    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    	<h5><i class="icon fas fa-check"></i> Success! </h5>
-    	{{ session('pesan') }}.
-    </div>
-    @endif
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>No</th>
-				<th>NIK</th>
-				<th>Nama Lengkap</th>
-				<th>Alamat</th>
-				<th>Nomor HP</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php $no=1; ?>
-			@foreach ($anggota as $data)
+		<table class="table">
+			<thead>
 				<tr>
-					<td>{{$no++}}</td>
-					<td>{{$data->nik}}</td>
-					<td>{{$data->nama_anggota}}</td>
-					<td>{{$data->alamat}}</td>
-					<td>{{$data->no_hp}}</td>
-					<td>
-						<a href="/anggota/detail/{{ $data->id_anggota }}" class="btn btn-sm btn-success">Detail</a>
-						<a href="/anggota/edit/{{ $data->id_anggota }}" class="btn btn-sm btn-warning">Edit</a>
-						<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete{{ $data->id_anggota}}"> Hapus
-                </button> 
-					</td>
+					<th>No</th>
+					<th>NIK</th>
+					<th>Nama Lengkap</th>
+					<th>Alamat</th>
+					<th>Nomor HP</th>
+					<th>Aksi</th>
 				</tr>
-			@endforeach
-		</tbody>
-	</table>
+			</thead>
+			<tbody id="table-body"></tbody>
+		</table>
+	</div>
 
+	@include('js/javascript')
+	<script type="text/javascript">
+		$("document").ready(function() {
+			showData();
+		});
 
-@foreach ($anggota as $data)
-	<div class="modal modal-danger fade" id="delete{{ $data->id_anggota }}">
-        <div class="modal-dialog">
-          <div class="modal-content bg-default">
-            <div class="modal-header">
-              <h4 class="modal-title">{{ $data->nama_anggota }}</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Apakah Anda Yakin Ingin Menghapus Data Ini?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-              <a href="/anggota/delete/{{ $data->id_anggota}}" class="btn btn-primary">Iya</a>
-            </div>
-          </div>
-           <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-@endforeach
+		function showData() {
+			$.ajax({
+				type: 'GET',
+				url: '/member',
+				success: function(result) {
+					const element = $('#table-body').html("");
+					result.data.forEach((value, index) => {
+						element.append(
+							'<tr>'+
+								'<td>'+ (index+1) +'</td>'+
+								'<td>'+ value.nik +'</td>'+
+								'<td>'+ value.full_name +'</td>'+
+								'<td>'+ value.address +'</td>'+
+								'<td>'+ value.phone_number +'</td>'+
+								'<td>'+
+									'<div class="anggota__table-button">'+
+										'<a class="anggota__table-button-secondary" href="/anggota/detail/'+ value.id +'">Detail</a>'+
+										// '<a class="anggota__table-button-success" href="">Edit</a>'+
+										// '<button class="anggota__table-button-danger">Delete</button>'+
+									'</div>'+
+								'</td>'+
+							'</tr>'
+						);
+					});
+				}
+			});
+		}
+	</script>
 @endsection
