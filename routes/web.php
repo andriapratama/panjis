@@ -10,6 +10,8 @@ use App\Http\Controllers\BendaharaController;
 use App\Http\Controllers\PengembanganController;
 use App\Http\Controllers\PublikasiController;
 use App\Http\Controllers\AbsenController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PeminjamanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,7 +74,14 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 	Route::get('/transaction', [BendaharaController::class, 'getData']);
 	Route::get('/transaction/{id}', [BendaharaController::class, 'getOneData']);
 
+	//Barang
+	Route::get('/barang', [BarangController::class, 'index'])->name('barang');
+	Route::get('/barang/new', [BarangController::class, 'new'])->name('barang.new');
+	Route::get('/product', [BarangController::class, 'getData']);
 
+	//Peminjaman
+	Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman');
+	Route::get('/peminjaman/new', [PeminjamanController::class, 'new'])->name('peminjaman.new');
 
 	//Sekretaris
 	Route::get('/sekretaris', [SekretarisController::class, 'index'])->name('sekretaris');

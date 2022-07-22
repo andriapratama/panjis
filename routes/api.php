@@ -6,6 +6,7 @@ use App\Http\Controllers\BendaharaController;
 use App\Http\Controllers\PublikasiController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AbsenController;
+use App\Http\Controllers\BarangController;
 
 
 /*
@@ -33,3 +34,5 @@ Route::post('/member', [AnggotaController::class, 'store']);
 
 Route::post('/absent', [AbsenController::class, 'store']);
 Route::post('/absent/update', [AbsenController::class, 'updateAbsentDetail']);
+
+Route::post('/product', [BarangController::class, 'store']);

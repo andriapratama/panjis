@@ -22,16 +22,33 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/pengembangan" class="nav-link">
-               <i class="nav-icon fas fa-chart-pie"></i>
-              <p>Pengembangan</p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="/publikasi" class="nav-link">
                <i class="nav-icon fas fa-image"></i>
               <p>Publikasi</p>
             </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Pengembangan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/barang" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Barang</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/peminjaman" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Peminjaman</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
