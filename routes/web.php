@@ -9,6 +9,7 @@ use App\Http\Controllers\SekretarisController;
 use App\Http\Controllers\BendaharaController;
 use App\Http\Controllers\PengembanganController;
 use App\Http\Controllers\PublikasiController;
+use App\Http\Controllers\AbsenController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +56,15 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 	Route::get('/member', [AnggotaController::class, 'getData']);
 	Route::get('/member/{id}', [AnggotaController::class, 'getOneData']);
 
+	//Absen
+	Route::get('/absen', [AbsenController::class, 'index'])->name('absen');
+	Route::get('/absen/new', [AbsenController::class, 'new'])->name('absen.new');
+	Route::get('/absen/detail/{id}', [AbsenController::class, 'detail'])->name('absen.detail');
+	
+	Route::get('/absen/first-data', [AbsenController::class, 'getFirstData']);
+	Route::get('/absen/data', [AbsenController::class, 'getData']);
+	Route::get('/absen/{id}', [AbsenController::class, 'getOneData']);
+
 	//Bendahara
 	Route::get('/bendahara', [BendaharaController::class, 'index'])->name('bendahara');
 	Route::get('/bendahara/new/{status}', [BendaharaController::class, 'new'])->name('bendahara.new');
@@ -80,16 +90,4 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 
 	Route::get('/sekretaris', [SekretarisController::class, 'index'])->name('sekretaris');
 
-	Route::get('/bendahara', [BendaharaController::class, 'index'])->name('bendahara');
-
-	Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota');
-	Route::get('/anggota/detail/{id_anggota}', [AnggotaController::class, 'detail']);
-	Route::get('/anggota/add', [AnggotaController::class, 'add']);
-	Route::post('/anggota/insert', [AnggotaController::class, 'insert']);
-	Route::get('/anggota/edit/{id_anggota}', [AnggotaController::class, 'edit']);
-	Route::post('/anggota/update/{id_anggota}', [AnggotaController::class, 'update']);
-	Route::get('/anggota/delete/{id_anggota}', [AnggotaController::class, 'delete']);
 	Route::get('/pengembangan', [PengembanganController::class, 'index'])->name('pengembangan');
-
-
-	Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi');

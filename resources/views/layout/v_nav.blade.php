@@ -42,16 +42,16 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/pengurus" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pengurus</p>
-                </a>
-              </li>
-              <li class="nav-item">
+            <li class="nav-item">
                 <a href="/anggota" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Anggota</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/absen" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Absen</p>
                 </a>
               </li>
             </ul>

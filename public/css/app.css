@@ -13,7 +13,8 @@ p {
 .bendahara-detail__container,
 .publikasi-new__container,
 .anggota__container,
-.anggota-new__container {
+.anggota-new__container,
+.absen__container {
     width: 100%;
     background: white;
     padding: 20px;
@@ -23,7 +24,8 @@ p {
 
 .bendahara__button,
 .bendahara-transaksi__button,
-.anggota__head {
+.anggota__head,
+.absen__head {
     width: 100%;
     display: flex;
     margin-bottom: 20px;
@@ -31,7 +33,8 @@ p {
 
 .bendahara__button-primary,
 .publikasi__button-primary,
-.anggota__button-primary {
+.anggota__button-primary,
+.absen__button-primary {
     padding: 5px 10px 5px 10px;
     background-color: #007bff;
     border-radius: 5px;
@@ -41,7 +44,8 @@ p {
 }
 
 .bendahara__button-table-secondary,
-.anggota__table-button-secondary {
+.anggota__table-button-secondary,
+.absen__table-button-secondary {
     padding: 3px 8px 3px 8px;
     background-color: #6c757d;
     border-radius: 5px;
@@ -93,6 +97,8 @@ p {
     border: none;
 }
 
+.absen__button-primary:hover,
+.absen__table-button-secondary:hover,
 .anggota-new__button-success:hover,
 .anggota__button-primary:hover,
 .anggota__table-button-danger:hover,
@@ -112,7 +118,8 @@ p {
 
 .bendahara-transaksi__input-text,
 .publikasi-new__input-text,
-.anggota-new__input-text {
+.anggota-new__input-text,
+.absen__input-text {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -141,12 +148,14 @@ p {
     font-size: 18px;
 }
 
-.bendahara-detail__head {
+.bendahara-detail__head,
+.absen-new__head {
     width: 100%;
     margin-bottom: 10px;
 }
 
-.bendahara-detail__head-group {
+.bendahara-detail__head-group,
+.absen-new__head-group {
     display: flex;
     align-items: center;
     font-size: 18px;
@@ -268,14 +277,16 @@ p {
 }
 
 .publikasi-detail__container,
-.anggota-detail__container {
+.anggota-detail__container,
+.absen-new__container {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
 .publikasi-detail__card,
-.anggota-detail__card {
+.anggota-detail__card,
+.absen-new__card {
     width: 800px;
     border-radius: 10px;
     padding: 30px;

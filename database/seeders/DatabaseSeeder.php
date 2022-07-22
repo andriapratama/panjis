@@ -24,5 +24,25 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+
+        DB::table('members')->insert([
+            'nik'   => "1234567890123456",
+            'full_name' => "wowok",
+            'address'   => 'klungkung',
+            'phone_number'  => '123456789012',
+            'gender'    => 'laki-laki',
+            'created_at' => Carbon::now()->format('Y-m-d'),
+            'updated_at' => Carbon::now()->format('Y-m-d'),
+        ]);
+
+        DB::table('members')->insert([
+            'nik'   => "1234567890123456",
+            'full_name' => "bagus",
+            'address'   => 'klungkung',
+            'phone_number'  => '123456789012',
+            'gender'    => 'laki-laki',
+            'created_at' => Carbon::now()->format('Y-m-d'),
+            'updated_at' => Carbon::now()->format('Y-m-d'),
+        ]);
     }
 }

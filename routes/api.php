@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BendaharaController;
 use App\Http\Controllers\PublikasiController;
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\AbsenController;
 
 
 /*
@@ -29,3 +30,6 @@ Route::post('/transaction', [BendaharaController::class, 'store']);
 Route::post('/gallery', [PublikasiController::class, 'store']);
 
 Route::post('/member', [AnggotaController::class, 'store']);
+
+Route::post('/absent', [AbsenController::class, 'store']);
+Route::post('/absent/update', [AbsenController::class, 'updateAbsentDetail']);
