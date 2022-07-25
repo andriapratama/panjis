@@ -82,6 +82,10 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 	//Peminjaman
 	Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman');
 	Route::get('/peminjaman/new', [PeminjamanController::class, 'new'])->name('peminjaman.new');
+	Route::get('/peminjaman/detail/{id}', [PeminjamanController::class, 'detail'])->name('peminjaman.detail');
+	Route::get('/peminjaman/print/{id}', [PeminjamanController::class, 'print'])->name('peminjaman.print');
+	Route::get('/loan', [PeminjamanController::class, 'getData']);
+	Route::get('/loan/{id}', [PeminjamanController::class, 'getOneData']);
 
 	//Sekretaris
 	Route::get('/sekretaris', [SekretarisController::class, 'index'])->name('sekretaris');

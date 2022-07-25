@@ -7,6 +7,7 @@ use App\Http\Controllers\PublikasiController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PeminjamanController;
 
 
 /*
@@ -36,3 +37,6 @@ Route::post('/absent', [AbsenController::class, 'store']);
 Route::post('/absent/update', [AbsenController::class, 'updateAbsentDetail']);
 
 Route::post('/product', [BarangController::class, 'store']);
+
+Route::post('/loan', [PeminjamanController::class, 'store']);
+Route::post('/loan/status/{id}', [PeminjamanController::class, 'updateStatus']);

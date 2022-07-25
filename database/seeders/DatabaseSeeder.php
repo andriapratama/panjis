@@ -44,5 +44,23 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d'),
             'updated_at' => Carbon::now()->format('Y-m-d'),
         ]);
+
+        DB::table('products')->insert([
+            'name'  => 'Sound',
+            'quantity'  => 10,
+            'unit'  => 'buah',
+        ]);
+
+        DB::table('products')->insert([
+            'name'  => 'Kabel',
+            'quantity'  => 10,
+            'unit'  => 'gulung',
+        ]);
+
+        DB::table('products')->insert([
+            'name'  => 'Mic',
+            'quantity'  => 10,
+            'unit'  => 'buah',
+        ]);
     }
 }

@@ -31,8 +31,6 @@
         let title = "";
 		let numberFormat = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR"});
 
-        console.log(name);
-
         $("document").ready(function() {
             renderTableTransaction();
             addTransactionItem();

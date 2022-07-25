@@ -12,4 +12,9 @@ class Product extends Model
     protected $table = "products";
     protected $primaryKey = "id";
     protected $fillable = ['name', 'quantity', 'unit'];
+
+    public function loan_detail()
+    {
+        return $this->hasMany(LoanDetail::class, "product_id", "id");
+    }
 }

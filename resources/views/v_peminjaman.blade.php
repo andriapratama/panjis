@@ -14,20 +14,54 @@
                     <th>Nama Peminjam</th>
                     <th>Tanggal Pinjam</th>
                     <th>Tanggal Kembali</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Wowok</td>
-                    <td>28-07-2022</td>
-                    <td>30-07-2022</td>
-                    <td>
-                        <a class="peminjaman__table-button-secondary" href="">Detail</a>
-                    </td>
-                </tr>
-            </tbody>
+            <tbody id="table-body"></tbody>
         </table>
     </div>
+
+    @include('js/javascript')
+    <script type="text/javascript">
+        $("document").ready(function() {
+            showData();
+        });
+
+        function showData() {
+            $.ajax({
+                type: 'GET',
+                url: '/loan',
+                success: function(result) {
+                    const element = $('#table-body').html("");
+                    result.data.forEach((value, index) => {
+                        element.append(
+                            '<tr>'+
+                                '<td>'+ (index+1) +'</td>'+
+                                '<td>'+ value.name +'</td>'+
+                                '<td>'+ value.start_date +'</td>'+
+                                '<td>'+ value.end_date +'</td>'+
+                                '<td id="status'+index+'"></td>'+
+                                '<td>'+
+                                    '<a class="peminjaman__table-button-secondary" href="/peminjaman/detail/'+value.id+'">Detail</a>'+
+                                    '<a class="peminjaman__table-button-info" target="_blank" href="/peminjaman/print/'+value.id+'">Print</a>'+
+                                '</td>'+
+                            '</tr>'
+                        );
+
+                        const status = $('#status'+index+'').html("");
+                        if (value.status === 0) {
+                            status.append(
+                                '<span class="status-danger">Dipinjam</span>'
+                            );
+                        } else {
+                            status.append(
+                                '<span class="status-success">Dikembalikan</span>'
+                            );
+                        }
+                    });
+                }
+            });
+        }
+    </script>
 @endsection

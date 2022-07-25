@@ -16,7 +16,8 @@ p {
 .anggota-new__container,
 .absen__container,
 .barang__container,
-.peminjaman__container {
+.peminjaman__container,
+.peminjaman-new__container {
     width: 100%;
     background: white;
     padding: 20px;
@@ -61,7 +62,12 @@ p {
     border: none;
 }
 
-.bendahara-transaksi__button-primary {
+.peminjaman-new__button {
+    margin-bottom: 20px;
+}
+
+.bendahara-transaksi__button-primary,
+.peminjaman-new__button-primary {
     width: 100%;
     height: 40px;
     text-align: center;
@@ -73,7 +79,8 @@ p {
     font-size: 20px;
 }
 
-.bendahara-transaksi__button-success {
+.bendahara-transaksi__button-success,
+.peminjaman-new__button-success {
     width: 100%;
     height: 40px;
     text-align: center;
@@ -86,7 +93,8 @@ p {
 }
 
 .bendahara-transaksi__button-table-danger,
-.anggota__table-button-danger {
+.anggota__table-button-danger,
+.peminjaman-new__table-button-danger {
     padding: 3px 8px 3px 8px;
     background-color: #dc3545;
     border-radius: 5px;
@@ -105,6 +113,11 @@ p {
     border: none;
 }
 
+.peminjaman-detail__button-success:hover,
+.peminjaman__table-button-info:hover,
+.peminjaman-new__button-primary:hover,
+.peminjaman-new__button-success:hover,
+.peminjaman-new__table-button-danger:hover,
 .peminjaman__button-primary:hover,
 .peminjaman__table-button-secondary:hover,
 .barang-new__button-success:hover,
@@ -133,7 +146,8 @@ p {
 .publikasi-new__input-text,
 .anggota-new__input-text,
 .absen__input-text,
-.barang-new__input-text {
+.barang-new__input-text,
+.peminjaman-new__input-text {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -141,12 +155,14 @@ p {
 }
 
 .anggota-new__input-select,
-.barang-new__input-select {
+.barang-new__input-select,
+.peminjaman-new__input-select {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     border: 2px solid #000000;
     cursor: pointer;
+    text-transform: capitalize;
 }
 
 .bendahara-transaksi__input-number {
@@ -272,11 +288,23 @@ p {
 
 .publikasi-new__button-success,
 .anggota-new__button-success,
-.barang-new__button-success {
+.barang-new__button-success,
+.peminjaman-detail__button-success {
     background-color: #28a745;
     padding: 5px 15px 5px 15px;
     border-radius: 5px;
     color: white;
+    border: none;
+}
+
+.peminjaman-detail__button-success-disabled {
+    background-color: #28a745;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5px;
+    opacity: 40%;
+    color: white;
+    text-decoration: none;
+    cursor: not-allowed;
     border: none;
 }
 
@@ -295,7 +323,8 @@ p {
 .publikasi-detail__container,
 .anggota-detail__container,
 .absen-new__container,
-.barang-new__container {
+.barang-new__container,
+.peminjaman-detail__container {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -304,12 +333,14 @@ p {
 .publikasi-detail__card,
 .anggota-detail__card,
 .absen-new__card,
-.barang-new__card {
+.barang-new__card,
+.peminjaman-detail__card {
     width: 800px;
     border-radius: 10px;
     padding: 30px;
     background-color: #ffffff;
     border: 1px solid #000000;
+    margin-bottom: 20px;
 }
 
 .publikasi-detail__image {
@@ -332,13 +363,59 @@ p {
     margin-bottom: 30px;
 }
 
-.anggota-detail__group {
+.anggota-detail__group,
+.peminjaman-detail__group {
     border-bottom: 2px solid black;
     margin-bottom: 20px;
 }
 
-.anggota-detail__group p {
+.anggota-detail__group p,
+.peminjaman-detail__group p {
     color: #6c757d;
+}
+
+.peminjaman__table-button-info {
+    background-color: #17a2b8;
+    padding: 3px 8px 3px 8px;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: white;
+    border: none;
+}
+
+.peminjaman-pdf__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.peminjaman-pdf__card {
+    width: 612px;
+    height: 842px;
+    background-color: #ffffff;
+    margin-top: 50px;
+}
+
+.peminjaman-pdf__title {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.peminjaman-pdf__desc {
+    width: 450px;
+    margin-left: 5px;
+    text-align: justify;
+    line-height: 1.2;
+}
+
+.peminjaman-pdf__footer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.peminjaman-pdf__footer-body {
+    text-align: center;
 }
 
 .flex-align-center {
@@ -346,7 +423,8 @@ p {
     align-items: center;
 }
 
-.status-in-column {
+.status-in-column,
+.status-success {
     width: 100px;
     border-radius: 10px;
     padding: 3px 0 3px 0;
@@ -357,7 +435,8 @@ p {
     justify-content: center;
 }
 
-.status-out-column {
+.status-out-column,
+.status-danger {
     width: 100px;
     border-radius: 10px;
     padding: 3px 0 3px 0;
