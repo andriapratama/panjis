@@ -12,6 +12,7 @@ use App\Http\Controllers\PublikasiController;
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PengumumanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -86,6 +87,12 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 	Route::get('/peminjaman/print/{id}', [PeminjamanController::class, 'print'])->name('peminjaman.print');
 	Route::get('/loan', [PeminjamanController::class, 'getData']);
 	Route::get('/loan/{id}', [PeminjamanController::class, 'getOneData']);
+
+	//Pengumuman
+	Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');
+	Route::get('/pengumuman/new', [PengumumanController::class, 'new'])->name('pengumuman.new');
+	Route::get('/announ', [PengumumanController::class, 'getData']);
+	Route::get('/announ/{id}', [PengumumanController::class, 'getOneData']);
 
 	//Sekretaris
 	Route::get('/sekretaris', [SekretarisController::class, 'index'])->name('sekretaris');

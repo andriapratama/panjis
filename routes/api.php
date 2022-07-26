@@ -8,6 +8,7 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PengumumanController;
 
 
 /*
@@ -40,3 +41,5 @@ Route::post('/product', [BarangController::class, 'store']);
 
 Route::post('/loan', [PeminjamanController::class, 'store']);
 Route::post('/loan/status/{id}', [PeminjamanController::class, 'updateStatus']);
+
+Route::post('/announ', [PengumumanController::class, 'store']);

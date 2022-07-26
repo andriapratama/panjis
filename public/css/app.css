@@ -4,6 +4,17 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+    height: 100%;
+    position: absolute;
+    width: auto;
+    left: 0;
+    right: 0;
+}
+
 p {
     margin: 0;
 }
@@ -17,7 +28,9 @@ p {
 .absen__container,
 .barang__container,
 .peminjaman__container,
-.peminjaman-new__container {
+.peminjaman-new__container,
+.pengumuman__container,
+.pengumuman-new__container {
     width: 100%;
     background: white;
     padding: 20px;
@@ -30,7 +43,8 @@ p {
 .anggota__head,
 .absen__head,
 .barang__head,
-.peminjaman__head {
+.peminjaman__head,
+.pengumuman__head {
     width: 100%;
     display: flex;
     margin-bottom: 20px;
@@ -41,7 +55,8 @@ p {
 .anggota__button-primary,
 .absen__button-primary,
 .barang__button-primary,
-.peminjaman__button-primary {
+.peminjaman__button-primary,
+.pengumuman__button-primary {
     padding: 5px 10px 5px 10px;
     background-color: #007bff;
     border-radius: 5px;
@@ -53,7 +68,8 @@ p {
 .bendahara__button-table-secondary,
 .anggota__table-button-secondary,
 .absen__table-button-secondary,
-.peminjaman__table-button-secondary {
+.peminjaman__table-button-secondary,
+.pengumuman__table-button-secondary {
     padding: 3px 8px 3px 8px;
     background-color: #6c757d;
     border-radius: 5px;
@@ -113,6 +129,21 @@ p {
     border: none;
 }
 
+.publikasi-new__button-success,
+.anggota-new__button-success,
+.barang-new__button-success,
+.peminjaman-detail__button-success,
+.pengumuman-new__button-success {
+    background-color: #28a745;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+}
+
+.pengumuman-new__button-success:hover,
+.pengumuman__button-primary:hover,
+.pengumuman__table-button-secondary:hover,
 .peminjaman-detail__button-success:hover,
 .peminjaman__table-button-info:hover,
 .peminjaman-new__button-primary:hover,
@@ -147,7 +178,8 @@ p {
 .anggota-new__input-text,
 .absen__input-text,
 .barang-new__input-text,
-.peminjaman-new__input-text {
+.peminjaman-new__input-text,
+.pengumuman-new__input-text {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -170,6 +202,15 @@ p {
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     appearance: none;
+}
+
+.pengumuman-new__input-date,
+.peminjaman-new__input-date {
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    border: 2px solid #000000;
+    position: relative;
 }
 
 .bendahara-transaksi__rp {
@@ -284,17 +325,6 @@ p {
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     border: 2px solid #000000;
-}
-
-.publikasi-new__button-success,
-.anggota-new__button-success,
-.barang-new__button-success,
-.peminjaman-detail__button-success {
-    background-color: #28a745;
-    padding: 5px 15px 5px 15px;
-    border-radius: 5px;
-    color: white;
-    border: none;
 }
 
 .peminjaman-detail__button-success-disabled {

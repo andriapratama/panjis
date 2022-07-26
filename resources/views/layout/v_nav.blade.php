@@ -10,12 +10,6 @@
           </li>
       @if (auth()->user()->level==1)
           <li class="nav-item">
-            <a href="/sekretaris" class="nav-link">
-               <i class="nav-icon fas fa-book"></i>
-              <p>Sekretaris</p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="/bendahara" class="nav-link">
                <i class="nav-icon fas fa-edit"></i>
               <p>Bendahara</p>
@@ -26,6 +20,35 @@
                <i class="nav-icon fas fa-image"></i>
               <p>Publikasi</p>
             </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Sekretaris
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/pengumuman" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pengumuman</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/notulen" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Notulen</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/lpj" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>LPJ</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -72,6 +95,12 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/admin" class="nav-link">
+               <i class="nav-icon fas fa-user"></i>
+              <p>Admin</p>
+            </a>
           </li>
       @elseif(auth()->user()->level==2)
           <li class="nav-item">

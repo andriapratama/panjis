@@ -4,8 +4,8 @@
 @section('content')
     <div class="peminjaman-new__container">
         <div style="margin-bottom: 20px; display: block;">
-            <label for="name">Nama Humas</label>
-            <input class="peminjaman-new__input-text" type="text" placeholder="Masukkan nama humas" id="name" onkeyup="handleChangeHumasName(this)">
+            <label for="name-humas">Nama Humas</label>
+            <input class="peminjaman-new__input-text" type="text" placeholder="Masukkan nama humas" id="name-humas" onkeyup="handleChangeHumasName(this)">
             <div id="error-humas-name"></div>
         </div>
 
@@ -16,26 +16,26 @@
         </div>
 
         <div style="margin-bottom: 20px; display: block;">
-            <label for="name">Alamat Peminjam</label>
+            <label for="address">Alamat Peminjam</label>
             <input class="peminjaman-new__input-text" type="text" placeholder="Masukkan alamat peminjam" id="address" onkeyup="handleChangeAddress(this)">
             <div id="error-address"></div>
         </div>
 
         <div style="margin-bottom: 20px; display: block;">
-            <label for="name">No. Telp</label>
+            <label for="phone">No. Telp</label>
             <input class="peminjaman-new__input-text" type="text" placeholder="Masukkan no telepon peminjam" id="phone" onkeyup="handleChangePhone(this)">
             <div id="error-phone"></div>
         </div>
 
         <div style="margin-bottom: 20px; display: block;">
-            <label for="name">Tanggal Mulai</label>
-            <input class="peminjaman-new__input-text" type="date" id="startDate" onkeyup="handleKeyupStartDate(this)" onchange="handleChangesStartDate(this)">
+            <label for="startDate">Tanggal Mulai</label>
+            <input class="peminjaman-new__input-date" type="date" id="startDate" onchange="handleChangesStartDate(this)">
             <div id="error-start-date"></div>
         </div>
 
         <div style="margin-bottom: 20px; display: block;">
-            <label for="name">Tanggal Akhir</label>
-            <input class="peminjaman-new__input-text" type="date" id="endDate" onkeyup="handleKeyupEndDate(this)" onchange="handleChangeEndDate(this)">
+            <label for="endDate">Tanggal Akhir</label>
+            <input class="peminjaman-new__input-date" type="date" id="endDate" onchange="handleChangeEndDate(this)">
             <div id="error-end-date"></div>
         </div>
 
@@ -59,7 +59,15 @@
         let phone = {value: "", error: false};
         let startDate = {value: "", error: false};
         let endDate = {value: "", error: false};
-        
+
+        const today = new Date();
+        const month = (today.getMonth()+1);
+        let dateToday = "";
+        if (parseInt(month) < 10) {
+            dateToday = today.getFullYear()+'-'+"0"+(today.getMonth()+1)+'-'+today.getDate();
+        } else {
+            dateToday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        }
 
         $("document").ready(function() {
             showProduct();
@@ -201,40 +209,56 @@
             $('#error-phone').html("");
         }
 
-        function handleKeyupStartDate(e) {
-            const value = $(e).val();
-
-            startDate.value = value;
-            startDate.error = false;
-
-            $('#error-start-date').html("");
-        }
-
         function handleChangesStartDate(e) {
             const value = $(e).val();
 
-            startDate.value = value;
-            startDate.error = false;
+            if (value < dateToday) {
+                const el = $('#error-start-date').html("");
+                el.append(
+                    '<span class="error">Tanggal tidak boleh kurang dari hari ini</span>'
+                )
+                
+                startDate.value = "";
+                startDate.error = true;
 
-            $('#error-start-date').html("");
-        }
+                $(e).val("");
+            } else {
+                startDate.value = value;
+                startDate.error = false;
 
-        function handleKeyupEndDate(e) {
-            const value = $(e).val();
-
-            endDate.value = value;
-            endDate.error = false;
-
-            $('#error-end-date').html("");
+                $('#error-start-date').html("");
+            }
         }
 
         function handleChangeEndDate(e) {
             const value = $(e).val();
 
-            endDate.value = value;
-            endDate.error = false;
+            const el = $('#error-end-date').html("");
+            if (value < dateToday) {
+                el.append(
+                    '<span class="error">Tanggal tidak boleh kurang dari hari ini</span>'
+                )
+                
+                endDate.value = "";
+                endDate.error = true;
 
-            $('#error-end-date').html("");
+                $(e).val("");
+            } else if (endDate.value < startDate.value) {
+                el.append(
+                    '<span class="error">Tanggal akhir tidak boleh kurang dari tanggal awal</span>'
+                );
+
+                endDate.value = "";
+                endDate.error = true;
+
+                $(e).val("");
+            } else {
+                endDate.value = value;
+                endDate.error = false;
+    
+                $('#error-end-date').html("");
+            }
+
         }
 
         function handleChangeProduct(e) {
@@ -314,11 +338,6 @@
             if (endDate.value === "") {
                 endDateEl.append(
                     '<span class="error">Tanggal akhir harus diisi</span>'
-                );
-                endDate.error = true;
-            } else if (endDate.value < startDate.value) {
-                endDateEl.append(
-                    '<span class="error">Tanggal akhir tidak boleh kurang dari tanggal awal</span>'
                 );
                 endDate.error = true;
             }
