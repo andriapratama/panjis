@@ -14,6 +14,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\NotulenController;
+use App\Http\Controllers\LpjController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -102,11 +103,12 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 	Route::get('/note', [NotulenController::class, 'getData']);
 	Route::get('/note/{id}', [NotulenController::class, 'getOneData']);
 
-	//Sekretaris
-	Route::get('/sekretaris', [SekretarisController::class, 'index'])->name('sekretaris');
+	//LPJ
+	Route::get('/lpj', [LpjController::class, 'index'])->name('lpj');
+	Route::get('/lpj/new', [LpjController::class, 'new'])->name('lpj.new');
+	Route::get('/report', [LpjController::class, 'getData']);
+	Route::get('/report/{id}', [LpjController::class, 'getFile']);
 
-	//Pengembangan
-	Route::get('/pengembangan', [PengembanganController::class, 'index'])->name('pengembangan');
 
 	//Publikasi
 	Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi');
@@ -115,7 +117,3 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 	Route::get('/gallery', [PublikasiController::class, 'getData']);
 	Route::get('/gallery/{id}', [PublikasiController::class, 'getOneData']);
 
-
-	Route::get('/sekretaris', [SekretarisController::class, 'index'])->name('sekretaris');
-
-	Route::get('/pengembangan', [PengembanganController::class, 'index'])->name('pengembangan');

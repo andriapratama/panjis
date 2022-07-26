@@ -10,6 +10,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\NotulenController;
+use App\Http\Controllers\LpjController;
 
 
 /*
@@ -46,3 +47,5 @@ Route::post('/loan/status/{id}', [PeminjamanController::class, 'updateStatus']);
 Route::post('/announ', [PengumumanController::class, 'store']);
 
 Route::post('/note', [NotulenController::class, 'store']);
+
+Route::post('/report', [LpjController::class, 'store']);

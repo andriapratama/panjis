@@ -32,7 +32,9 @@ p {
 .pengumuman__container,
 .pengumuman-new__container,
 .notulen__container,
-.notulen-new__container {
+.notulen-new__container,
+.lpj__container,
+.lpj-new__container {
     width: 100%;
     background: white;
     padding: 20px;
@@ -48,7 +50,8 @@ p {
 .barang__head,
 .peminjaman__head,
 .pengumuman__head,
-.notulen__head {
+.notulen__head,
+.lpj__head {
     width: 100%;
     display: flex;
     margin-bottom: 20px;
@@ -61,7 +64,8 @@ p {
 .barang__button-primary,
 .peminjaman__button-primary,
 .pengumuman__button-primary,
-.notulen__button-primary {
+.notulen__button-primary,
+.lpj__button-primary {
     padding: 5px 10px 5px 10px;
     background-color: #007bff;
     border-radius: 5px;
@@ -75,7 +79,8 @@ p {
 .absen__table-button-secondary,
 .peminjaman__table-button-secondary,
 .pengumuman__table-button-secondary,
-.notulen__table-button-secondary {
+.notulen__table-button-secondary,
+.lpj__table-button-secondary {
     padding: 3px 8px 3px 8px;
     background-color: #6c757d;
     border-radius: 5px;
@@ -129,7 +134,8 @@ p {
 }
 
 .anggota__table-button-success,
-.barang__table-button-success {
+.barang__table-button-success,
+.lpj__table-button-success {
     padding: 3px 8px 3px 8px;
     background-color: #28a745;
     border-radius: 5px;
@@ -142,7 +148,8 @@ p {
 .anggota-new__button-success,
 .barang-new__button-success,
 .peminjaman-detail__button-success,
-.pengumuman-new__button-success {
+.pengumuman-new__button-success,
+.lpj-new__button-success {
     background-color: #28a745;
     padding: 5px 15px 5px 15px;
     border-radius: 5px;
@@ -150,6 +157,10 @@ p {
     border: none;
 }
 
+.lpj__table-button-secondary:hover,
+.lpj__table-button-success:hover,
+.lpj-new__button-success:hover,
+.lpj__button-primary:hover,
 .notulen-new__button-success:hover,
 .notulen-new__button-primary:hover,
 .notulen-new__table-button-danger:hover,
@@ -194,7 +205,8 @@ p {
 .barang-new__input-text,
 .peminjaman-new__input-text,
 .pengumuman-new__input-text,
-.notulen-new__input-text {
+.notulen-new__input-text,
+.lpj-new__input-text {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -465,13 +477,6 @@ p {
 
 .peminjaman-pdf__footer-body {
     text-align: center;
-}
-
-.notulen__table-title {
-    text-overflow: ellipsis;
-    width: 100%;
-    overflow: hidden;
-    white-space: normal;
 }
 
 .notulen-new__input-textarea {
