@@ -30,12 +30,15 @@ p {
 .peminjaman__container,
 .peminjaman-new__container,
 .pengumuman__container,
-.pengumuman-new__container {
+.pengumuman-new__container,
+.notulen__container,
+.notulen-new__container {
     width: 100%;
     background: white;
     padding: 20px;
     border: 1px solid black;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .bendahara__button,
@@ -44,7 +47,8 @@ p {
 .absen__head,
 .barang__head,
 .peminjaman__head,
-.pengumuman__head {
+.pengumuman__head,
+.notulen__head {
     width: 100%;
     display: flex;
     margin-bottom: 20px;
@@ -56,7 +60,8 @@ p {
 .absen__button-primary,
 .barang__button-primary,
 .peminjaman__button-primary,
-.pengumuman__button-primary {
+.pengumuman__button-primary,
+.notulen__button-primary {
     padding: 5px 10px 5px 10px;
     background-color: #007bff;
     border-radius: 5px;
@@ -69,7 +74,8 @@ p {
 .anggota__table-button-secondary,
 .absen__table-button-secondary,
 .peminjaman__table-button-secondary,
-.pengumuman__table-button-secondary {
+.pengumuman__table-button-secondary,
+.notulen__table-button-secondary {
     padding: 3px 8px 3px 8px;
     background-color: #6c757d;
     border-radius: 5px;
@@ -83,20 +89,22 @@ p {
 }
 
 .bendahara-transaksi__button-primary,
-.peminjaman-new__button-primary {
+.peminjaman-new__button-primary,
+.notulen-new__button-primary {
     width: 100%;
     height: 40px;
     text-align: center;
     background-color: #007bff;
     border-radius: 5px;
-    margin-right: 5px;
     color: white;
     border: none;
     font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .bendahara-transaksi__button-success,
-.peminjaman-new__button-success {
+.peminjaman-new__button-success,
+.notulen-new__button-success {
     width: 100%;
     height: 40px;
     text-align: center;
@@ -110,7 +118,8 @@ p {
 
 .bendahara-transaksi__button-table-danger,
 .anggota__table-button-danger,
-.peminjaman-new__table-button-danger {
+.peminjaman-new__table-button-danger,
+.notulen-new__table-button-danger {
     padding: 3px 8px 3px 8px;
     background-color: #dc3545;
     border-radius: 5px;
@@ -141,6 +150,11 @@ p {
     border: none;
 }
 
+.notulen-new__button-success:hover,
+.notulen-new__button-primary:hover,
+.notulen-new__table-button-danger:hover,
+.notulen__button-primary:hover,
+.notulen__table-button-secondary:hover,
 .pengumuman-new__button-success:hover,
 .pengumuman__button-primary:hover,
 .pengumuman__table-button-secondary:hover,
@@ -179,7 +193,8 @@ p {
 .absen__input-text,
 .barang-new__input-text,
 .peminjaman-new__input-text,
-.pengumuman-new__input-text {
+.pengumuman-new__input-text,
+.notulen-new__input-text {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -188,7 +203,8 @@ p {
 
 .anggota-new__input-select,
 .barang-new__input-select,
-.peminjaman-new__input-select {
+.peminjaman-new__input-select,
+.notulen-new__input-select {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -205,7 +221,8 @@ p {
 }
 
 .pengumuman-new__input-date,
-.peminjaman-new__input-date {
+.peminjaman-new__input-date,
+.notulen-new__input-date {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -354,7 +371,8 @@ p {
 .anggota-detail__container,
 .absen-new__container,
 .barang-new__container,
-.peminjaman-detail__container {
+.peminjaman-detail__container,
+.notulen-detail__container {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -364,7 +382,8 @@ p {
 .anggota-detail__card,
 .absen-new__card,
 .barang-new__card,
-.peminjaman-detail__card {
+.peminjaman-detail__card,
+.notulen-detail__card {
     width: 800px;
     border-radius: 10px;
     padding: 30px;
@@ -448,9 +467,58 @@ p {
     text-align: center;
 }
 
+.notulen__table-title {
+    text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden;
+    white-space: normal;
+}
+
+.notulen-new__input-textarea {
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    border: 2px solid #000000;
+}
+
+.notulen-new__group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notulen-detail__container p {
+    font-size: 17px;
+}
+
+.notulen-detail__head {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.notulen-detail__head-title {
+    width: 400px;
+    text-align: center;
+}
+
+.notulen-detail__title {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+.notulen-detail__desc {
+    width: 570px;
+    margin-left: 5px;
+    text-align: justify;
+}
+
 .flex-align-center {
     display: flex;
     align-items: center;
+    justify-content: end;
 }
 
 .status-in-column,

@@ -13,6 +13,7 @@ use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\NotulenController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,6 +94,13 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 	Route::get('/pengumuman/new', [PengumumanController::class, 'new'])->name('pengumuman.new');
 	Route::get('/announ', [PengumumanController::class, 'getData']);
 	Route::get('/announ/{id}', [PengumumanController::class, 'getOneData']);
+
+	//Notulen
+	Route::get('/notulen', [NotulenController::class, 'index'])->name('notulen');
+	Route::get('/notulen/new', [NotulenController::class, 'new'])->name('notulen.new');
+	Route::get('/notulen/detail/{id}', [NotulenController::class, 'detail'])->name('notulen.detail');
+	Route::get('/note', [NotulenController::class, 'getData']);
+	Route::get('/note/{id}', [NotulenController::class, 'getOneData']);
 
 	//Sekretaris
 	Route::get('/sekretaris', [SekretarisController::class, 'index'])->name('sekretaris');
