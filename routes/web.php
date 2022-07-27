@@ -3,11 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\AnggotaController;
-use App\Http\Controllers\SekretarisController;
 use App\Http\Controllers\BendaharaController;
-use App\Http\Controllers\PengembanganController;
 use App\Http\Controllers\PublikasiController;
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\BarangController;
@@ -15,6 +12,7 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\NotulenController;
 use App\Http\Controllers\LpjController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,27 +30,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Bendahara
-Route::get('/bendahara', [BendaharaController::class, 'index'])->name('bendahara');
-
-//Sekretaris
-Route::get('/sekretaris', [SekretarisController::class, 'index'])->name('sekretaris');
-
-//Pengembangan
-Route::get('/pengembangan', [PengembanganController::class, 'index'])->name('pengembangan');
-
-//Publikasi
-Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi');
-
-
-	//Pengurus
-	Route::get('/pengurus', [PengurusController::class, 'index'])->name('pengurus');
-	Route::get('/pengurus/detail/{id_pengurus}', [PengurusController::class, 'detail']);
-	Route::get('/pengurus/add', [PengurusController::class, 'add']);
-	Route::post('/pengurus/insert', [PengurusController::class, 'insert']);
-	Route::get('/pengurus/edit/{id_pengurus}', [PengurusController::class, 'edit']);
-	Route::post('/pengurus/update/{id_pengurus}', [PengurusController::class, 'update']);
-	Route::get('/pengurus/delete/{id_pengurus}', [PengurusController::class, 'delete']);
+	//Admin
+	Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+	Route::get('/user', [AdminController::class, 'getData']);
 
 	//Anggota
 	Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota');
@@ -108,7 +88,6 @@ Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi
 	Route::get('/lpj/new', [LpjController::class, 'new'])->name('lpj.new');
 	Route::get('/report', [LpjController::class, 'getData']);
 	Route::get('/report/{id}', [LpjController::class, 'getFile']);
-
 
 	//Publikasi
 	Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi');

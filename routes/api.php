@@ -11,6 +11,7 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\NotulenController;
 use App\Http\Controllers\LpjController;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -49,3 +50,5 @@ Route::post('/announ', [PengumumanController::class, 'store']);
 Route::post('/note', [NotulenController::class, 'store']);
 
 Route::post('/report', [LpjController::class, 'store']);
+
+Route::post('/user/role', [AdminController::class, 'updateRole']);

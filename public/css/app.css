@@ -34,7 +34,8 @@ p {
 .notulen__container,
 .notulen-new__container,
 .lpj__container,
-.lpj-new__container {
+.lpj-new__container,
+.admin__container {
     width: 100%;
     background: white;
     padding: 20px;
@@ -51,7 +52,8 @@ p {
 .peminjaman__head,
 .pengumuman__head,
 .notulen__head,
-.lpj__head {
+.lpj__head,
+.admin__head {
     width: 100%;
     display: flex;
     margin-bottom: 20px;
@@ -65,7 +67,8 @@ p {
 .peminjaman__button-primary,
 .pengumuman__button-primary,
 .notulen__button-primary,
-.lpj__button-primary {
+.lpj__button-primary,
+.admin__button-primary {
     padding: 5px 10px 5px 10px;
     background-color: #007bff;
     border-radius: 5px;
@@ -80,7 +83,8 @@ p {
 .peminjaman__table-button-secondary,
 .pengumuman__table-button-secondary,
 .notulen__table-button-secondary,
-.lpj__table-button-secondary {
+.lpj__table-button-secondary,
+.admin__table-button-secondary {
     padding: 3px 8px 3px 8px;
     background-color: #6c757d;
     border-radius: 5px;
@@ -157,6 +161,8 @@ p {
     border: none;
 }
 
+.admin__button-primary:hover,
+.admin__table-button-secondary:hover,
 .lpj__table-button-secondary:hover,
 .lpj__table-button-success:hover,
 .lpj-new__button-success:hover,
@@ -216,7 +222,8 @@ p {
 .anggota-new__input-select,
 .barang-new__input-select,
 .peminjaman-new__input-select,
-.notulen-new__input-select {
+.notulen-new__input-select,
+.admin__input-select {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
