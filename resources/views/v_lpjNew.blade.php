@@ -16,6 +16,7 @@
         </div>
 
         <button class="lpj-new__button-success" type="button" onclick="handleSave()">Simpan</button>
+        <a class="lpj-new__button-secondary" href="{{ url()->previous() }}">Kembali</a>
     </div>
 
     @include('js/javascript')

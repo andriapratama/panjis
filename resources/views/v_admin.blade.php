@@ -1,5 +1,5 @@
 @extends('layout.v_template')
-@section('title', 'Laporan Penanggung Jawaban')
+@section('title', 'Admin')
 
 @section('content')
     <div class="admin__container">

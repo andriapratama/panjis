@@ -28,6 +28,7 @@
         <button class="notulen-new__button-primary" type="button" onclick="handleAddParagraf()">Tambah Paragraf</button>
         <button class="notulen-new__button-primary" type="button" onclick="handleAddList()">Tambah List</button>
         <button class="notulen-new__button-success" type="button" onclick="handleSave()">Simpan</button>
+        <a class="notulen-new__button-secondary" href="{{ url()->previous() }}">Kembali</a>
     </div>
 
     @include('js/javascript')

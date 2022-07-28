@@ -26,6 +26,8 @@
                 </thead>
                 <tbody id="table-body"></tbody>
             </table>
+
+            <a class="absen-new__button-secondary" href="{{ url()->previous() }}">Kembali</a>
         </div>
     </div>
 

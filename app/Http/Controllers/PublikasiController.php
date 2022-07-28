@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Gallery;
+use App\Models\GalleryDetail;
 
 class PublikasiController extends Controller
 {
@@ -29,13 +30,21 @@ class PublikasiController extends Controller
 
     public function store(Request $request)
     {
-        $path = $request->file('image')->store('uploads', 'public');
-
-        Gallery::create([
+        $gallery = Gallery::create([
             'title' => $request['title'],
             'desc'  => $request['desc'],
-            'image' => $path
         ]);
+
+        foreach($request->file('image') as $key => $value) {
+            $name = $value['value']->getClientOriginalname();
+            $path = $value['value']->store('uploads', 'public');
+
+            GalleryDetail::create([
+                'gallery_id'    => $gallery['id'],
+                'name'          => $name,
+                'path'          => $path
+            ]);
+        }
 
         return response()->json([
             'status'    => 'true',
@@ -56,7 +65,7 @@ class PublikasiController extends Controller
 
     public function getOneData($id)
     {
-        $data = Gallery::where("id", "=", $id)->first();
+        $data = Gallery::with('gallery_detail')->where("id", "=", $id)->first();
 
         return response()->json([
             'status'    => 'true',

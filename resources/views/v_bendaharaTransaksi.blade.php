@@ -12,13 +12,11 @@
         
         <div id="table-transaksi"></div>
     
-        <div class="bendahara-transaksi__button">
-            <button class="bendahara-transaksi__button-primary" type="button" onClick="handleAddColumnTable(this)">Tambah</button>
-        </div>
+        <button class="bendahara-transaksi__button-primary" type="button" onClick="handleAddColumnTable(this)">Tambah</button>
 
-        <div class="bendahara-transaksi__button">
-            <button class="bendahara-transaksi__button-success" type="button" onClick="handleSave(this)">Simpan</button>
-        </div>
+        <button class="bendahara-transaksi__button-success" type="button" onClick="handleSave(this)">Simpan</button>
+
+        <a class="bendahara-transaksi__button-secondary" href="{{ url()->previous() }}">Kembali</a>
     </div>
 
     @include('js/javascript')

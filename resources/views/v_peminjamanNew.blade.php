@@ -41,13 +41,9 @@
 
         <div id="table"></div>
         
-        <div class="peminjaman-new__button">
-            <button class="peminjaman-new__button-primary" type="button" onclick="handleAddColumnTable()">Tambah</button>
-        </div>
-
-        <div class="peminjaman-new__button">
-            <button class="peminjaman-new__button-success" type="button" onclick="handleSave()">Simpan</button>
-        </div>
+        <button class="peminjaman-new__button-primary" type="button" onclick="handleAddColumnTable()">Tambah</button>
+        <button class="peminjaman-new__button-success" type="button" onclick="handleSave()">Simpan</button>
+        <a class="peminjaman-new__button-secondary" href="{{ url()->previous() }}">Kembali</a>
     </div>
 
     @include('js/javascript')

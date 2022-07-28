@@ -11,5 +11,10 @@ class Gallery extends Model
 
     protected $table = "galleries";
     protected $primaryKey = "id";
-    protected $fillable = ["title", "desc", "image"];
+    protected $fillable = ["title", "desc"];
+
+    public function gallery_detail()
+    {
+        return $this->hasMany(GalleryDetail::class, "gallery_id", "id");
+    }
 }

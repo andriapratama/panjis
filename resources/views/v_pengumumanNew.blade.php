@@ -22,6 +22,7 @@
         </div>
 
         <button class="pengumuman-new__button-success" type="button" onclick="handleSave()">Simpan</button>
+        <a class="pengumuman-new__button-secondary" href="{{ url()->previous() }}">Kembali</a>
     </div>
 
     @include('js/javascript')

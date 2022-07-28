@@ -13,15 +13,12 @@
             <div id="error-desc"></div>
         </div>
 
-        <div style="margin-bottom: 20px; display: block;">
-            <input class="publikasi-new__input-file" type="file" id="image" accept="image/png, image/gif, image/jpeg, image/jpg" onchange="handleChangeImage(this)">
-            <div id="error-image"></div>
-        </div>
-
-        <div id="preview" class="publikasi-new__preview-image" ></div>
+        <div id="image-space"></div>
 
         <div>
+            <button class="publikasi-new__button-primary" type="button" onclick="handleAddImage()">Tambah Gambar</button>
             <button class="publikasi-new__button-success" type="button" onclick="handleSave()">Simpan</button>
+            <a class="publikasi-new__button-secondary" href="{{ url()->previous() }}">Kembali</a>
         </div>
     </div>
 
@@ -29,11 +26,56 @@
     <script type="text/javascript">
         let title = "";
         let desc = "";
-        let imageFile = null;
+        let imageFile = [];
 
          $("document").ready(function() {
-            $('#preview').html("");
+            addImageFile();
+            renderImageInput();
         });
+
+        function addImageFile() {
+            imageFile.push({
+                name: "",
+                value: null,
+                preview: null,
+            });
+        }
+
+        function renderImageInput() {
+            const el = $('#image-space').html("");
+            imageFile.forEach((data, index) => {
+                el.append(
+                    '<div style="margin-bottom: 20px; display: block;">'+
+                        '<div style="display: flex; justify-content: space-between; items-content: center;">'+
+                            '<input class="publikasi-new__input-file" style="width: 90%;" type="file" id="image" accept="image/png, image/gif, image/jpeg, image/jpg" data-index="'+index+'" value="'+data.name+'" onchange="handleChangeImage(this)">'+
+                            '<button class="publikasi-new__button-danger type="button" data-index="'+index+'" onclick="handleDeleteColumn(this)">Hapus</button>'+
+                        '</div>'+
+                        '<div id="error-image'+index+'"></div>'+
+                    '</div>'+
+
+                    '<div id="preview'+index+'" class="publikasi-new__preview-image"></div>'
+                );
+
+                if (data.preview === null) {
+                    $('#preview'+index+'').html("");
+                } else {
+                    const el = $('#preview'+index+'').html("");
+                    el.append(
+                        '<img src="'+data.preview+'" id="preview-image'+index+'" alt="preview'+index+'">'
+                    );
+                }
+            });
+        }
+
+        function handleAddImage() {
+            imageFile.push({
+                name: "",
+                value: null,
+                preview: null,
+            });
+
+            renderImageInput();
+        }
 
          function handleChangeTitle(e) {
             const value = $(e).val();
@@ -53,22 +95,39 @@
             element.html("");
          }
 
+         function handleDeleteColumn(e) {
+            const index = $(e).data('index');
+
+            if (imageFile.length === 1) {
+                imageFile = [{
+                    name: "",
+                    value: null,
+                    preview: null,
+                }];
+
+                renderImageInput();
+            } else {
+                imageFile.splice(index, 1);
+
+                renderImageInput();
+            }
+         }
+
          function handleChangeImage(e) {
-            const value = $(e).val();
+            const index = $(e).data('index');
+            const name = $(e)[0].files[0].name;
             const file = $(e)[0].files[0];
 
-            imageFile = file;
-
-            const previewImage = $('#preview').html("");
-            previewImage.append(
-                '<img src="" id="preview-image" alt="preview">'
-            );
-
+            imageFile[index].name = name;
+            imageFile[index].value = file;
+            
             const imageURL = URL.createObjectURL(file);
-            $('#preview-image').attr('src', imageURL); 
+            imageFile[index].preview = imageURL;
 
-            const element = $('#error-image');
+            const element = $('#error-image'+index+'');
             element.html("");
+
+            renderImageInput();
          }
 
          function handleSave() {
@@ -88,24 +147,32 @@
                 );
             }
 
-            if (imageFile === null) {
-                const element = $('#error-image');
-                element.html("");
-                element.append(
-                    '<span class="error">Image harus diisi</span>'
-                );
-            }
+            imageFile.forEach((data, index) => {
+                if (data.value === null) {
+                    const element = $('#error-image'+index+'').html("");
+                    element.append(
+                        '<span class="error">Image harus diisi</span>'
+                    );
+                }
+            });
 
-            if (title !== "" && desc !== "" && imageFile !== null){
+            const checkImage = imageFile.findIndex((data) => !data.value);
+
+            if (title !== "" && desc !== "" && checkImage === -1){
                 storeData();
             }
+
+            console.log(imageFile);
          }
 
          function storeData() {
             const formData = new FormData();
             formData.append('title', title);
             formData.append('desc', desc);
-            formData.append('image', imageFile);
+
+            imageFile.forEach((data, index) => {
+                formData.append('image['+index+'][value]', data.value);
+            });
 
             $.ajax({
                 type: 'POST',
