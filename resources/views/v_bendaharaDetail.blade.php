@@ -35,7 +35,7 @@
             </tbody>
         </table>
 
-        <a class="button-secondary" href="{{ url()->previous() }}">Kembali</a>
+        <a class="button-secondary" href="/bendahara">Kembali</a>
     </div>
 
     @include('js/javascript')

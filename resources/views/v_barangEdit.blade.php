@@ -2,8 +2,8 @@
 @section('title', 'Barang')
 
 @section('content')
-    <div class="barang-new__container">
-        <div class="barang-new__card">
+    <div class="barang-edit__container">
+        <div class="barang-edit__card">
             <div style="margin-bottom: 20px; display: block;">
                 <input class="input-text" type="text" placeholder="Masukkan nama barang" id="name" onkeyup="handleChangeName(this)">
                 <div id="error-name"></div>
@@ -15,27 +15,50 @@
             </div>
 
             <div style="margin-bottom: 20px; display: block;">
-                <select class="input-select" onchange="handleChangeUnit(this)">
+                <select class="input-select" id="unit" onchange="handleChangeUnit(this)">
                     <option value="" hidden>Pilih satuan barang</option>
                     <option value="buah">Buah</option>
                     <option value="lembar">Lembar</option>
-                    <option value="ikat">Gulung</option>
+                    <option value="gulung">Gulung</option>
                     <option value="kg">Kg</option>
                     <option value="g">g</option>
                 </select>
                 <div id="error-unit"></div>
             </div>
 
-            <button class="button-success" type="button" onclick="handleSave()">Simpan</button>
+            <button class="button-success" type="button" onclick="handleUpdate()">Simpan</button>
             <a class="button-secondary" href="{{ url()->previous() }}">Kembali</a>
         </div>
     </div>
 
     @include('js/javascript')
     <script type="text/javascript">
+        const id = '{{$id}}';
         let name = {value: "", error: false};
         let quantity = {value: "", error: false};
         let unit = {value: "", error: false};
+
+        $("document").ready(function() {
+            showData();
+        });
+
+        function showData() {
+            $.ajax({
+                type: 'GET',
+                url: '/product/' + id,
+                success: function(result) {
+                    console.log(result);
+                    const data = result.data;
+                    name.value = data.name;
+                    quantity.value = data.quantity;
+                    unit.value = data.unit;
+
+                    $('#name').val(data.name);
+                    $('#quantity').val(data.quantity);
+                    $('#unit').val(data.unit);
+                }
+            });
+        }
 
         function handleChangeName(e) {
             const value = $(e).val();
@@ -62,7 +85,7 @@
             unit.error = false;
         }
 
-        function handleSave() {
+        function handleUpdate() {
             const nameElement = $('#error-name').html("");
             const quantityElement = $('#error-quantity').html("");
             const unitElement = $('#error-unit').html("");
@@ -89,11 +112,11 @@ s            }
             }
 
             if (name.error === false && quantity.error === false && unit.error === false) {
-                storeData();
+                updateData();
             }
         }
 
-        function storeData() {
+        function updateData() {
             const formData = new FormData();
             formData.append('name', name.value);
             formData.append('quantity', quantity.value);
@@ -101,7 +124,7 @@ s            }
 
             $.ajax({
                 type: 'POST',
-                url: '/api/product',
+                url: '/api/product/update/' + id,
                 data: formData,
                 contentType: false,
                 processData: false,

@@ -10,7 +10,7 @@ class BendaharaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['store']);
+        $this->middleware('auth')->except(['store', 'update']);
     }
 
     public function index()
@@ -26,6 +26,11 @@ class BendaharaController extends Controller
     public function detail($id)
     {
         return view('v_bendaharaDetail', ['id' => $id]);
+    }
+
+    public function edit($id)
+    {
+        return view('v_bendaharaEdit', ['id' => $id]);
     }
 
     public function store(Request $request)
@@ -70,6 +75,31 @@ class BendaharaController extends Controller
             'status'    => 'true',
             'message'   => 'Success to get one data transaction with transaction detail',
             'data'      => $data
+        ], 200);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = Transaction::find($id);
+        $data->user_id = $request['userId'];
+        $data->title = $request['title'];
+        $data->status = $request['status'];
+        $data->total = $request['total'];
+        $data->save();
+
+        TransactionDetail::where('transaction_id', '=', $id)->delete();
+
+        foreach($request->transactionList as $key => $value) {
+            TransactionDetail::create([
+                'transaction_id'    => $id,
+                'name'              => $request->transactionList[$key]['name'],
+                'sub_total'         => $request->transactionList[$key]['subTotal'],
+            ]);
+        }
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to update data transaction',
         ], 200);
     }
 }

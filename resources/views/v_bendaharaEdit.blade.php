@@ -2,15 +2,35 @@
 @section('title', 'Bendahara')
 
 @section('content')
-    <div class="bendahara-transaksi__container">
-        <h3 id="title" style="margin-bottom: 20px;"></h3>
+    <div class="bendahara-edit__container">
+        <h3 id="title-page" style="margin-bottom: 20px;"></h3>
 
         <div style="margin-bottom: 30px; display: block;">
             <input class="input-text" type="text" placeholder="Masukkan Judul" id="title" onkeyup="handleChangeTitle(this)">
             <div id="error-title"></div>
         </div>
         
-        <div id="table-transaksi"></div>
+        <div style="margin-bottom: 30px; display: block;">
+            <select class="input-select" id="status" onchange="handleChangeStatus(this)">
+                <option value="" hidden>Pilih status</option>
+                <option value="in">Pemasukan</option>
+                <option value="out">Pengeluaran</option>
+            </select>
+            <div id="error-status"></div>
+        </div>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">No</th>
+                    <th>Nama</th>
+                    <th style="width: 25%;">Sub Total</th>
+                    <th style="width: 5%;">Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+            <tbody id="table-body-total"></tbody>
+        </table>
     
         <button class="button-primary-full" type="button" onClick="handleAddColumnTable(this)">Tambah</button>
 
@@ -21,58 +41,53 @@
 
     @include('js/javascript')
     <script type="text/javascript">
+        const id = '{{$id}}';
         let transactionList = [];
-        let status = '{{$status}}';
         let total = 0;
+        let status = "";
         let userId = '{{ Auth::user()->id }}';
         let title = "";
 		let numberFormat = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR"});
 
         $("document").ready(function() {
-            renderTableTransaction();
-            addTransactionItem();
-            renderTransactionItem();
-            showTitle();
-            sumTotal();
+            showData();
         });
 
-        function showTitle() {
-            if (status === "in") {
-                $('#title').html('<span>Pemasukan</span>');
-            } else {
-                $('#title').html("<span>Pengeluaran</span>");
-            }
-        }
+        function showData() {
+            $.ajax({
+                type: 'GET',
+                url: '/transaction/' + id,
+                success: function(result) {
+                    if (result.data.status === "in") {
+                        $('#title-page').html('<span>Pemasukan</span>');
+                    } else {
+                        $('#title-page').html("<span>Pengeluaran</span>");
+                    }
 
-        function renderTableTransaction() {
-            const element = $('#table-transaksi');
-            element.html("");
-            element.append(
-                '<table class="table">'+
-                    '<thead>'+
-                        '<tr>'+
-                            '<th style="width: 5%;">No</th>'+
-                            '<th>Nama</th>'+
-                            '<th style="width: 25%;">Sub Total</th>'+
-                            '<th style="width: 5%;">Aksi</th>'+
-                        '</tr>'+
-                    '</thead>'+
-                    '<tbody id="table-body"></tbody>'+
-                    '<tbody id="table-body-total"></tbody>'+
-                '</table>'
-            );
-        }
+                    $('#title').val(result.data.title);
+                    $('#status').val(result.data.status);
 
-        function addTransactionItem() {
-            transactionList.push({
-                name: "",
-                subTotal: 0,
+                    total = result.data.total;
+                    title = result.data.title;
+                    status = result.data.status;
+
+                    result.data.transaction_detail.forEach((value, index) => {
+                        transactionList.push({
+                            name: value.name,
+                            subTotal: value.sub_total
+                        });
+                    });
+
+                    setTimeout(() => {
+                        renderTransactionItem();
+                        sumTotal();
+                    }, 500);
+                }
             });
         }
 
         function renderTransactionItem() {
-            const element = $('#table-body');
-            element.html("");
+            const element = $('#table-body').html("");
             transactionList.forEach((value, index) => {
                 element.append(
                     '<tr>'+
@@ -138,6 +153,20 @@
             $('#error-title').html("");
         }
 
+        function handleChangeStatus(e) {
+            const value = $(e).val();
+
+            status = value;
+
+            $('#error-status').html("");
+
+            if (value === "in") {
+                $('#title-page').html('<span>Pemasukan</span>');
+            } else {
+                $('#title-page').html("<span>Pengeluaran</span>");
+            }
+        }
+
         function handleChangeName(e) {
             const index = $(e).data('index');
             const value = $(e).val();
@@ -175,20 +204,18 @@
 
         function handleSave() {
             if (title == "") {
-                const element = $('#error-title');
-                element.html("");
+                const element = $('#error-title').html("");
                 element.append(
-                    '<span style="color: red; font-size: 15px;">Judul transaksi harus diisi</span>'
-                )
+                    '<span class="error">Judul transaksi harus diisi</span>'
+                );
             }
 
             transactionList.forEach((value, index) => {
                 if (value.name === "") {
-                    const element = $('#error-name'+index+'');
-                    element.html("");
+                    const element = $('#error-name'+index+'').html("");
                     element.append(
-                        '<span style="color: red; font-size: 15px;">Nama transaksi harus diisi</span>'
-                    )
+                        '<span class="error">Nama transaksi harus diisi</span>'
+                    );
                 }
 
                 if (value.subTotal === 0) {
@@ -202,11 +229,11 @@
             const checkName = transactionList.findIndex((value) => !value.name);
             const checkSubTotal = transactionList.findIndex((value) => value.subTotal === 0);
             if (checkName === -1 && checkSubTotal === -1 && title.length > 0) {
-                storeData();
+                updateData();
             }
         }
 
-        function storeData() {
+        function updateData() {
             const formData = new FormData();
             formData.append("userId", userId);
             formData.append("title", title);
@@ -220,14 +247,14 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/api/transaction',
+                url: '/api/transaction/update/' + id,
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: function(result) {
-                    window.location.href = "/bendahara";
+                    window.location.href = "/bendahara/detail/" + id;
                 }
-            });
+            })
         }
     </script>
 @endsection

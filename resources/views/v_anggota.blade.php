@@ -45,7 +45,7 @@
 								'<td>'+
 									'<div class="anggota__table-button">'+
 										'<a class="table-button-secondary" href="/anggota/detail/'+ value.id +'">Detail</a>'+
-										// '<a class="table-button-success" href="">Edit</a>'+
+										'<a class="table-button-success" href="/anggota/edit/'+value.id+'">Edit</a>'+
 										// '<button class="table-button-danger">Delete</button>'+
 									'</div>'+
 								'</td>'+

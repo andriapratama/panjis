@@ -21,12 +21,13 @@
             <div id="error-date"></div>
         </div>
 
-        <button class="button-success" type="button" onclick="handleSave()">Simpan</button>
+        <button class="button-success" type="button" onclick="handleUpdate()">Simpan</button>
         <a class="button-secondary" href="{{ url()->previous() }}">Kembali</a>
     </div>
 
     @include('js/javascript')
     <script type="text/javascript">
+        const id = '{{$id}}';
         let title = {value: "", error: false};
         let announ = {value: "", error: false};
         let date = {value: "", error: false};
@@ -38,6 +39,29 @@
             dateToday = today.getFullYear()+'-'+"0"+(today.getMonth()+1)+'-'+today.getDate();
         } else {
             dateToday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        }
+
+        $("document").ready(function() {
+            showData();
+        });
+
+        function showData() {
+            $.ajax({
+                type: 'GET',
+                url: '/announ/' + id,
+                success: function(result) {
+                    console.log(result);
+                    const data = result.data;
+
+                    title.value = data.title;
+                    announ.value = data.announ;
+                    date.value = data.date;
+
+                    $('#title').val(data.title);
+                    $('#announ').val(data.announ);
+                    $('#date').val(data.date);
+                }
+            });
         }
 
         function handleChangeTitle(e) {
@@ -79,7 +103,7 @@
             }
         }
 
-        function handleSave() {
+        function handleUpdate() {
             const titleEl = $('#error-title').html("");
             const announEl = $('#error-announ').html("");
             const dateEl = $('#error-date').html("");
@@ -106,11 +130,11 @@
             }
 
             if (title.error === false && announ.error === false && date.error === false) {
-                storeData();
+                updateData();
             }
         }
 
-        function storeData() {
+        function updateData() {
             const formData = new FormData();
             formData.append('title', title.value);
             formData.append('announ', announ.value);
@@ -118,7 +142,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/api/announ',
+                url: '/api/announ/update/' + id,
                 data: formData,
                 contentType: false,
                 processData: false,

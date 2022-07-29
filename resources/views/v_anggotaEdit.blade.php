@@ -2,7 +2,7 @@
 @section('title', 'Anggota')
 
 @section('content')
-    <div class="anggota-new__container">
+    <div class="anggota-edit__container">
         <div style="margin-bottom: 20px; display: block;">
             <input class="input-text" type="number" placeholder="Masukkan nik anggota" id="nik" onkeyup="handleChangeNik(this)">
             <div id="error-nik"></div>
@@ -24,7 +24,7 @@
         </div>
 
         <div style="margin-bottom: 20px; display: block;">
-            <select class="input-select" onchange="handleChangeGender(this)">
+            <select class="input-select" id="gender" onchange="handleChangeGender(this)">
                 <option value="" hidden>Pilih jenis kelamin</option>
                 <option value="laki-laki">Laki-Laki</option>
                 <option value="perempuan">Perempuan</option>
@@ -37,12 +37,38 @@
     </div>
 
     @include('js/javascript')
-    <script type="text/javascript">
+    <script>
+        const id = '{{$id}}';
         let nik = {value: "", error: false};
         let name = {value: "", error: false};
         let address = {value: "", error: false};
         let phone = {value: "", error: false};
         let gender = {value: "", error: false};
+
+        $("document").ready(function() {
+            showData();
+        });
+
+        function showData() {
+            $.ajax({
+                type: 'GET',
+                url: '/member/' + id,
+                success: function(result) {
+                    const data = result.data;
+                    nik.value = data.nik.toString();
+                    name.value = data.full_name;
+                    address.value = data.address;
+                    phone.value = data.phone_number;
+                    gender.value = data.gender;
+
+                    $('#nik').val(data.nik);
+                    $('#name').val(data.full_name);
+                    $('#address').val(data.address);
+                    $('#phone').val(data.phone_number);
+                    $('#gender').val(data.gender);
+                }
+            });
+        }
 
         function handleChangeNik(e) {
             const value = $(e).val();
@@ -157,11 +183,11 @@
             }
 
             if (nik.error === false && name.error === false && address.error === false && phone.error === false && gender.error === false) {
-                storeData();
+                updateData();
             }
         }
 
-        function storeData() {
+        function updateData() {
             const formData = new FormData();
             formData.append('nik', nik.value);
             formData.append('name', name.value);
@@ -171,15 +197,14 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/api/member',
+                url: '/api/member/update/' + id,
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: function(result) {
-                    window.location.href = "/anggota"
+                    window.location.href = "{{ url()->previous() }}";
                 }
             });
         }
-
     </script>
 @endsection

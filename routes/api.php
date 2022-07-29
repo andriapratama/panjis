@@ -32,23 +32,30 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Auth::routes();
 
 Route::post('/transaction', [BendaharaController::class, 'store']);
+Route::post('/transaction/update/{id}', [BendaharaController::class, 'update']);
 
 Route::post('/gallery', [PublikasiController::class, 'store']);
 
 Route::post('/member', [AnggotaController::class, 'store']);
+Route::post('/member/update/{id}', [AnggotaController::class, 'update']);
 
 Route::post('/absent', [AbsenController::class, 'store']);
 Route::post('/absent/update', [AbsenController::class, 'updateAbsentDetail']);
+Route::post('/absent/update/title/{id}', [AbsenController::class, 'updateDataTitle']);
 
 Route::post('/product', [BarangController::class, 'store']);
+Route::post('/product/update/{id}', [BarangController::class, 'update']);
 
 Route::post('/loan', [PeminjamanController::class, 'store']);
 Route::post('/loan/status/{id}', [PeminjamanController::class, 'updateStatus']);
 
 Route::post('/announ', [PengumumanController::class, 'store']);
+Route::post('/announ/update/{id}', [PengumumanController::class, 'update']);
 
 Route::post('/note', [NotulenController::class, 'store']);
 
 Route::post('/report', [LpjController::class, 'store']);
+Route::post('/report/update/title/{id}', [LpjController::class, 'updateTitle']);
+Route::post('/report/update/file/{id}', [LpjController::class, 'updateFile']);
 
 Route::post('/user/role', [AdminController::class, 'updateRole']);

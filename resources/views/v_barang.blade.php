@@ -41,7 +41,7 @@
                                 '<td>'+ value.quantity +'</td>'+
                                 '<td style="text-transform: capitalize;" >'+ value.unit +'</td>'+
                                 '<td>'+
-                                    '<a class="table-button-success" href="">Edit</a>'+
+                                    '<a class="table-button-success" href="/barang/edit/'+value.id+'">Edit</a>'+
                                 '</td>'+
                             '</tr>'
                         );

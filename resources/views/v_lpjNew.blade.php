@@ -5,13 +5,13 @@
     <div class="lpj-new__container">
         <div style="margin-bottom: 20px; display: block;">
             <label for="date">Judul</label>
-            <input class="lpj-new__input-text" type="text" id="title" placeholder="Masukkan judul lembar pertanggung jawaban" onkeyup="handleChangeTitle(this)">
+            <input class="input-text" type="text" id="title" placeholder="Masukkan judul lembar pertanggung jawaban" onkeyup="handleChangeTitle(this)">
             <div id="error-title"></div>
         </div>
 
         <div style="margin-bottom: 20px; display: block;">
             <label for="file">File LPJ</label>
-            <input class="lpj-new__input-text" type="file" id="file" accept="application/pdf" onchange="handleChangeFile(this)">
+            <input class="input-text" type="file" id="file" accept="application/pdf" onchange="handleChangeFile(this)">
             <div id="error-file"></div>
         </div>
 

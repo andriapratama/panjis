@@ -9,7 +9,7 @@ class PengumumanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['store']);
+        $this->middleware('auth')->except(['store', 'update']);
     }
 
     public function index()
@@ -20,6 +20,11 @@ class PengumumanController extends Controller
     public function new()
     {
     	return view('v_pengumumanNew');
+    }
+
+    public function edit($id)
+    {
+    	return view('v_pengumumanEdit', ['id' => $id]);
     }
 
     public function store(Request $request)
@@ -56,5 +61,19 @@ class PengumumanController extends Controller
             'message'   => 'success get one announcement data by id',
             'data'      => $data,
         ], 200);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = Announ::find($id);
+        $data->title = $request['title'];
+        $data->announ = $request['announ'];
+        $data->date = $request['date'];
+        $data->save();
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to update data'
+        ]);
     }
 }

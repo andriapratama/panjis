@@ -41,32 +41,28 @@
 					result.data.forEach((value, index) => {
 						const date = new Date(value.created_at);
 						const dateFormat = new Intl.DateTimeFormat(['ban', 'id']).format(date);
+						element.append(
+							'<tr>'+
+								'<td>'+ (index+1) +'</td>'+
+								'<td>'+ dateFormat +'</td>'+
+								'<td>'+ value.title +'</td>'+
+								'<td id="status'+index+'"></td>'+
+								'<td>'+ numberFormat.format(value.total) +'</td>'+
+								'<td>'+
+									'<a href="/bendahara/detail/'+ value.id +'" class="table-button-secondary">Detail</a>'+
+									'<a href="/bendahara/edit/'+ value.id +'" class="table-button-success">Edit</a>'+
+								'</td>'+
+							'</tr>'
+						);
 
+						const status = $('#status'+index+'').html("");
 						if (value.status === "in") {
-							element.append(
-								'<tr>'+
-									'<td>'+ (index+1) +'</td>'+
-									'<td>'+ dateFormat +'</td>'+
-									'<td>'+ value.title +'</td>'+
-									'<td><div class="status-in-column">Pemasukan</div></td>'+
-									'<td>'+ numberFormat.format(value.total) +'</td>'+
-									'<td>'+
-										'<a href="/bendahara/detail/'+ value.id +'" class="table-button-secondary">Detail</a>'+
-									'</td>'+
-								'</tr>'
+							status.append(
+								'<div class="status-in-column">Pemasukan</div>'
 							);
 						} else if (value.status === "out") {
-							element.append(
-								'<tr>'+
-									'<td>'+ (index+1) +'</td>'+
-									'<td>'+ dateFormat +'</td>'+
-									'<td>'+ value.title +'</td>'+
-									'<td><div class="status-out-column">Pengeluaran</div></td>'+
-									'<td>'+ numberFormat.format(value.total) +'</td>'+
-									'<td>'+
-										'<a href="/bendahara/detail/'+ value.id +'" class="table-button-secondary">Detail</a>'+
-									'</td>'+
-								'</tr>'
+							status.append(
+								'<div class="status-out-column">Pengeluaran</div>'
 							);
 						}
 					});

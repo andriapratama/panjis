@@ -22,9 +22,11 @@ p {
 .bendahara__container,
 .bendahara-transaksi__container,
 .bendahara-detail__container,
+.bendahara-edit__container,
 .publikasi-new__container,
 .anggota__container,
 .anggota-new__container,
+.anggota-edit__container,
 .absen__container,
 .barang__container,
 .peminjaman__container,
@@ -35,6 +37,7 @@ p {
 .notulen-new__container,
 .lpj__container,
 .lpj-new__container,
+.lpj-edit__container,
 .admin__container,
 .publikasi__container {
     width: 100%;
@@ -42,6 +45,33 @@ p {
     padding: 20px;
     border: 1px solid black;
     border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.publikasi-detail__container,
+.anggota-detail__container,
+.absen-new__container,
+.barang-new__container,
+.barang-edit__container,
+.peminjaman-detail__container,
+.notulen-detail__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.publikasi-detail__card,
+.anggota-detail__card,
+.absen-new__card,
+.barang-new__card,
+.barang-edit__card,
+.peminjaman-detail__card,
+.notulen-detail__card {
+    width: 800px;
+    border-radius: 10px;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
     margin-bottom: 20px;
 }
 
@@ -176,26 +206,14 @@ p {
     text-decoration: none;
 }
 
-.bendahara-transaksi__input-text,
-.publikasi-new__input-text,
-.anggota-new__input-text,
-.absen__input-text,
-.barang-new__input-text,
-.peminjaman-new__input-text,
-.pengumuman-new__input-text,
-.notulen-new__input-text,
-.lpj-new__input-text {
+.input-text {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     border: 2px solid #000000;
 }
 
-.anggota-new__input-select,
-.barang-new__input-select,
-.peminjaman-new__input-select,
-.notulen-new__input-select,
-.admin__input-select {
+.input-select {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -204,16 +222,14 @@ p {
     text-transform: capitalize;
 }
 
-.bendahara-transaksi__input-number {
+.input-number {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     appearance: none;
 }
 
-.pengumuman-new__input-date,
-.peminjaman-new__input-date,
-.notulen-new__input-date {
+.input-date {
     width: 100%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -339,6 +355,7 @@ p {
     text-decoration: none;
     cursor: not-allowed;
     border: none;
+    margin-right: 10px;
 }
 
 .publikasi-new__preview-image {
@@ -351,31 +368,6 @@ p {
 .publikasi-new__preview-image img {
     width: auto;
     height: 300px;
-}
-
-.publikasi-detail__container,
-.anggota-detail__container,
-.absen-new__container,
-.barang-new__container,
-.peminjaman-detail__container,
-.notulen-detail__container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.publikasi-detail__card,
-.anggota-detail__card,
-.absen-new__card,
-.barang-new__card,
-.peminjaman-detail__card,
-.notulen-detail__card {
-    width: 800px;
-    border-radius: 10px;
-    padding: 30px;
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    margin-bottom: 20px;
 }
 
 .publikasi-detail__image {
@@ -491,7 +483,7 @@ p {
 .flex-align-center {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: start;
 }
 
 .status-in-column,

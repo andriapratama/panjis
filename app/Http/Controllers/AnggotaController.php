@@ -9,7 +9,7 @@ class AnggotaController extends Controller
 {
 	public function __construct()
 	{
-		$this->middleware('auth')->except(['store']);
+		$this->middleware('auth')->except(['store', 'update']);
 	}
 
     public function index()
@@ -25,6 +25,11 @@ class AnggotaController extends Controller
 	public function detail($id)
 	{
 		return view('v_anggotaDetail', ['id' => $id]);
+	}
+
+	public function edit($id)
+	{
+		return view('v_anggotaEdit', ['id' => $id]);
 	}
 
 	public function store(Request $request)
@@ -62,6 +67,22 @@ class AnggotaController extends Controller
 			'status'	=> 'true',
 			'message'	=> 'success get one member data by id',
 			'data'		=> $data
+		], 200);
+	}
+
+	public function update(Request $request, $id)
+	{
+		$data = Member::find($id);
+		$data->nik = (int)$request['nik'];
+		$data->full_name = $request['name'];
+		$data->address = $request['address'];
+		$data->phone_number = $request['phone'];
+		$data->gender = $request['gender'];
+		$data->save();
+
+		return response()->json([
+			'status'	=> 'true',
+			'message'	=> 'success to update data member',
 		], 200);
 	}
 }

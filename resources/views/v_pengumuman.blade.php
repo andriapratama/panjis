@@ -62,6 +62,7 @@
                                 '<td>'+ value.date +'</td>'+
                                 '<td>'+
                                     '<button class="table-button-secondary" type="button" data-id="'+value.id+'" data-toggle="modal" data-target="#detail-modal" onclick="handleDetail(this)">Detail</button>'+
+                                    '<a class="table-button-success" href="/pengumuman/edit/'+value.id+'">Edit</a>'+
                                 '</td>'+
                             '</tr>'
                         );

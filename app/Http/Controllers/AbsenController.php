@@ -13,7 +13,7 @@ class AbsenController extends Controller
 {
     public function __construct()
 	{
-		$this->middleware('auth')->except(['store', 'updateAbsentDetail']);
+		$this->middleware('auth')->except(['store', 'updateAbsentDetail', 'updateDataTitle']);
 	}
 
     public function index()
@@ -125,6 +125,29 @@ class AbsenController extends Controller
             'message'   => 'success to open one absent data with id',
             'absent'    => $absent,
             'data'      => $data
+        ], 200);
+    }
+
+    public function getTitleData($id)
+    {
+        $data = Absent::find($id);
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to find title',
+            'data'      => $data,
+        ], 200);
+    }
+
+    public function updateDataTitle(Request $request, $id)
+    {
+        $data = Absent::find($id);
+        $data->title = $request['title'];
+        $data->save();
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to update title absent',
         ], 200);
     }
 }

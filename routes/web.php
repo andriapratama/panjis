@@ -38,6 +38,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota');
 	Route::get('/anggota/new', [AnggotaController::class, 'new'])->name('anggota.new');
 	Route::get('/anggota/detail/{id}', [AnggotaController::class, 'detail'])->name('anggota.detail');
+	Route::get('/anggota/edit/{id}', [AnggotaController::class, 'edit'])->name('anggota.edit');
 	Route::get('/member', [AnggotaController::class, 'getData']);
 	Route::get('/member/{id}', [AnggotaController::class, 'getOneData']);
 
@@ -48,19 +49,23 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	
 	Route::get('/absen/first-data', [AbsenController::class, 'getFirstData']);
 	Route::get('/absen/data', [AbsenController::class, 'getData']);
+	Route::get('/absen/title/{id}', [AbsenController::class, 'getTitleData']);
 	Route::get('/absen/{id}', [AbsenController::class, 'getOneData']);
 
 	//Bendahara
 	Route::get('/bendahara', [BendaharaController::class, 'index'])->name('bendahara');
 	Route::get('/bendahara/new/{status}', [BendaharaController::class, 'new'])->name('bendahara.new');
 	Route::get('/bendahara/detail/{id}', [BendaharaController::class, 'detail'])->name('bendahara.detail');
+	Route::get('/bendahara/edit/{id}', [BendaharaController::class, 'edit'])->name('bendahara.edit');
 	Route::get('/transaction', [BendaharaController::class, 'getData']);
 	Route::get('/transaction/{id}', [BendaharaController::class, 'getOneData']);
 
 	//Barang
 	Route::get('/barang', [BarangController::class, 'index'])->name('barang');
 	Route::get('/barang/new', [BarangController::class, 'new'])->name('barang.new');
+	Route::get('/barang/edit/{id}', [BarangController::class, 'edit'])->name('barang.edit');
 	Route::get('/product', [BarangController::class, 'getData']);
+	Route::get('/product/{id}', [BarangController::class, 'getOneData']);
 
 	//Peminjaman
 	Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman');
@@ -73,6 +78,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	//Pengumuman
 	Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');
 	Route::get('/pengumuman/new', [PengumumanController::class, 'new'])->name('pengumuman.new');
+	Route::get('/pengumuman/edit/{id}', [PengumumanController::class, 'edit'])->name('pengumuman.edit');
 	Route::get('/announ', [PengumumanController::class, 'getData']);
 	Route::get('/announ/{id}', [PengumumanController::class, 'getOneData']);
 
@@ -86,8 +92,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	//LPJ
 	Route::get('/lpj', [LpjController::class, 'index'])->name('lpj');
 	Route::get('/lpj/new', [LpjController::class, 'new'])->name('lpj.new');
+	Route::get('/lpj/edit/{id}', [LpjController::class, 'edit'])->name('lpj.edit');
 	Route::get('/report', [LpjController::class, 'getData']);
-	Route::get('/report/{id}', [LpjController::class, 'getFile']);
+	Route::get('/report/{id}', [LpjController::class, 'getOneData']);
 
 	//Publikasi
 	Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi');
