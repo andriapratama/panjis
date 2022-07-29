@@ -4,7 +4,7 @@
 @section('content')
 	<div class="publikasi__container">
 		<div class="publikasi__head">
-			<a class="publikasi__button-primary" href="/publikasi/new">Tambah Gambar</a>
+			<a class="button-primary" href="/publikasi/new">Tambah Gambar</a>
 		</div>
 
 		<table class="table">
@@ -38,7 +38,7 @@
 								'<td>' + (index+1) + '</td>'+
 								'<td>' + (value.title) + '</td>'+
 								'<td>'+
-									'<a class="publikasi__table-button-secondary" href="/publikasi/detail/'+value.id+'">Detail</a>'+
+									'<a class="table-button-secondary" href="/publikasi/detail/'+value.id+'">Detail</a>'+
 								'</td>'+
 							'</tr>'
 						);

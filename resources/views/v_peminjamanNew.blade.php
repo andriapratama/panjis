@@ -41,9 +41,9 @@
 
         <div id="table"></div>
         
-        <button class="peminjaman-new__button-primary" type="button" onclick="handleAddColumnTable()">Tambah</button>
-        <button class="peminjaman-new__button-success" type="button" onclick="handleSave()">Simpan</button>
-        <a class="peminjaman-new__button-secondary" href="{{ url()->previous() }}">Kembali</a>
+        <button class="button-primary-full" type="button" onclick="handleAddColumnTable()">Tambah</button>
+        <button class="button-success-full" type="button" onclick="handleSave()">Simpan</button>
+        <a class="button-secondary-full" href="{{ url()->previous() }}">Kembali</a>
     </div>
 
     @include('js/javascript')
@@ -110,7 +110,7 @@
                             '<div id="error-quantity'+index+'"></div>'+
                         '</td>'+
                         '<td>'+
-                            '<button class="peminjaman-new__table-button-danger" data-index="'+ index +'" onclick="handleDeleteColumnTable(this)">Hapus</button>'+
+                            '<button class="table-button-danger" data-index="'+ index +'" onclick="handleDeleteColumnTable(this)">Hapus</button>'+
                         '</td>'+
                     '</tr>'
                 );
@@ -239,7 +239,7 @@
                 endDate.error = true;
 
                 $(e).val("");
-            } else if (endDate.value < startDate.value) {
+            } else if (value < startDate.value) {
                 el.append(
                     '<span class="error">Tanggal akhir tidak boleh kurang dari tanggal awal</span>'
                 );

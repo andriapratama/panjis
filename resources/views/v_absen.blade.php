@@ -4,7 +4,7 @@
 @section('content')
     <div class="absen__container">
         <div class="absen__head">
-            <button class="absen__button-primary" type="button" data-toggle="modal" data-target="#add-modal">Tambah</button>
+            <button class="button-primary" type="button" data-toggle="modal" data-target="#add-modal">Tambah</button>
         </div>
 
         <table class="table">
@@ -87,7 +87,7 @@
                                 '<td>'+ value.title +'</td>'+
                                 '<td>'+ value.total +' anggota</td>'+
                                 '<td>'+
-                                    '<a class="absen__table-button-secondary" href="/absen/detail/'+ value.id +'">Open</a>'+
+                                    '<a class="table-button-secondary" href="/absen/detail/'+ value.id +'">Open</a>'+
                                 '</td>'+
                             '</tr>'
                         );

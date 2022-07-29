@@ -25,10 +25,10 @@
     <div class="notulen-new__container">
         <div id="text-space"></div>
         
-        <button class="notulen-new__button-primary" type="button" onclick="handleAddParagraf()">Tambah Paragraf</button>
-        <button class="notulen-new__button-primary" type="button" onclick="handleAddList()">Tambah List</button>
-        <button class="notulen-new__button-success" type="button" onclick="handleSave()">Simpan</button>
-        <a class="notulen-new__button-secondary" href="{{ url()->previous() }}">Kembali</a>
+        <button class="button-primary-full" type="button" onclick="handleAddParagraf()">Tambah Paragraf</button>
+        <button class="button-primary-full" type="button" onclick="handleAddList()">Tambah List</button>
+        <button class="button-success-full" type="button" onclick="handleSave()">Simpan</button>
+        <a class="button-secondary-full" href="{{ url()->previous() }}">Kembali</a>
     </div>
 
     @include('js/javascript')
@@ -71,7 +71,7 @@
                                 '<div id="error-paragraf'+index+'"></div>'+
                             '</div>'+
                             
-                            '<button class="notulen-new__table-button-danger" data-index="'+index+'" onclick="handleDeleteRow(this)">Hapus</button>'+
+                            '<button class="table-button-danger" data-index="'+index+'" onclick="handleDeleteRow(this)">Hapus</button>'+
                         '</div>'
                     );
                 } else if (value.status === 1) {
@@ -83,7 +83,7 @@
                                 '<div id="error-list'+index+'"></div>'+
                             '</div>'+
                             
-                            '<button class="notulen-new__table-button-danger" data-index="'+index+'" onclick="handleDeleteRow(this)">Hapus</button>'+
+                            '<button class="table-button-danger" data-index="'+index+'" onclick="handleDeleteRow(this)">Hapus</button>'+
                         '</div>'
                     );
                 }

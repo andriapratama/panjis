@@ -24,6 +24,8 @@
                 <p>Jenis Kelamin</p>
                 <h4 id="gender" style="text-transform: capitalize;"></h4>
             </div>
+
+            <a class="button-secondary" href="{{ url()->previous() }}">Kembali</a>
         </div>
     </div>
 

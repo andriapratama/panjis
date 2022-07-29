@@ -4,7 +4,7 @@
 @section('content')
     <div class="pengumuman__container">
         <div class="pengumuman__head">
-            <a class="pengumuman__button-primary" href="/pengumuman/new">Tambah</a>
+            <a class="button-primary" href="/pengumuman/new">Tambah</a>
         </div>
 
         <table class="table">
@@ -61,7 +61,7 @@
                                 '<td>'+ value.title +'</td>'+
                                 '<td>'+ value.date +'</td>'+
                                 '<td>'+
-                                    '<button class="pengumuman__table-button-secondary" type="button" data-id="'+value.id+'" data-toggle="modal" data-target="#detail-modal" onclick="handleDetail(this)">Detail</button>'+
+                                    '<button class="table-button-secondary" type="button" data-id="'+value.id+'" data-toggle="modal" data-target="#detail-modal" onclick="handleDetail(this)">Detail</button>'+
                                 '</td>'+
                             '</tr>'
                         );

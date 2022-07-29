@@ -32,8 +32,8 @@
             <div id="error-gender"></div>
         </div>
         
-        <button class="anggota-new__button-success" type="button" onclick="handleSave()">Simpan</button>
-        <a class="anggota-new__button-secondary" href="{{ url()->previous() }}">Kembali</a>
+        <button class="button-success" type="button" onclick="handleSave()">Simpan</button>
+        <a class="button-secondary" href="{{ url()->previous() }}">Kembali</a>
     </div>
 
     @include('js/javascript')

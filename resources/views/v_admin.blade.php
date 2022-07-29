@@ -69,7 +69,7 @@
                                 '<td>'+ value.email +'</td>'+
                                 '<td id="role'+index+'"></td>'+
                                 '<td>'+
-                                    '<button class="admin__table-button-secondary" type="button" data-toggle="modal" data-target="#edit-modal" data-id="'+value.id+'" data-role="'+value.level+'" onclick="handleEditRoleModal(this)">Edit Role</button>'+
+                                    '<button class="table-button-secondary" type="button" data-toggle="modal" data-target="#edit-modal" data-id="'+value.id+'" data-role="'+value.level+'" onclick="handleEditRoleModal(this)">Edit Role</button>'+
                                 '</td>'+
                             '</tr>'
                         );

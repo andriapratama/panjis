@@ -4,7 +4,7 @@
 @section('content')
     <div class="lpj__container">
         <div class="lpj__head">
-            <a class="lpj__button-primary" href="/lpj/new">Tambah</a>
+            <a class="button-primary" href="/lpj/new">Tambah</a>
         </div>
 
         <table class="table">
@@ -37,7 +37,7 @@
                                 '<td>'+ (index+1) +'</td>'+
                                 '<td>'+ value.title +'</td>'+
                                 '<td>'+
-                                    '<a class="lpj__table-button-secondary" target="_blank" href="/storage/'+ value.file +'">Lihat PDF</a>'+
+                                    '<a class="table-button-secondary" target="_blank" href="/storage/'+ value.file +'">Lihat PDF</a>'+
                                 '</td>'+
                             '</tr>'
                         );

@@ -4,7 +4,7 @@
 @section('content')
     <div class="notulen__container">
         <div class="notulen__head">
-            <a class="notulen__button-primary" href="/notulen/new">Tambah</a>
+            <a class="button-primary" href="/notulen/new">Tambah</a>
         </div>
 
         <table class="table">
@@ -39,7 +39,7 @@
                                 '<td style="max-width: 500px;">'+ value.title +'</td>'+
                                 '<td>'+ value.date +'</td>'+
                                 '<td>'+
-                                    '<a class="notulen__table-button-secondary" href="/notulen/detail/'+ value.id +'">Detail</a>'+
+                                    '<a class="table-button-secondary" href="/notulen/detail/'+ value.id +'">Detail</a>'+
                                 '</td>'+
                             '</tr>'
                         );

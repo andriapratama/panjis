@@ -11,6 +11,8 @@
             <div class="publikasi-detail__image">
                 <div class="grid"></div>
             </div>
+            
+            <a class="button-secondary" href="{{ url()->previous() }}">Kembali</a>
         </div>
     </div>
 

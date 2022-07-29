@@ -4,7 +4,7 @@
 @section('content')
     <div class="barang__container">
         <div class="barang__head">
-            <a class="barang__button-primary" href="/barang/new">Tambah</a>
+            <a class="button-primary" href="/barang/new">Tambah</a>
         </div>
 
         <table class="table">
@@ -41,7 +41,7 @@
                                 '<td>'+ value.quantity +'</td>'+
                                 '<td style="text-transform: capitalize;" >'+ value.unit +'</td>'+
                                 '<td>'+
-                                    '<a class="barang__table-button-success" href="">Edit</a>'+
+                                    '<a class="table-button-success" href="">Edit</a>'+
                                 '</td>'+
                             '</tr>'
                         );

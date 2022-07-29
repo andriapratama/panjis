@@ -45,7 +45,10 @@
                 </table>
             </div>
 
-            <div id="button"></div>
+            <div style="display: flex;">
+                <div id="button"></div>
+                <a class="button-secondary" href="{{ url()->previous() }}">Kembali</a>
+            </div>
         </div>
     </div>
 
@@ -74,12 +77,12 @@
                     if (result.loan.status === 0) {
                         $('#status').html("Dipinjam");
                         button.append(
-                            '<button class="peminjaman-detail__button-success" type="button" onclick="handleDone()">Selesai</button>'
+                            '<button class="button-success" type="button" onclick="handleDone()">Selesai</button>'
                         )
                     } else {
                         $('#status').html("Dikembalikan");
                         button.append(
-                            '<button class="peminjaman-detail__button-success-disabled" type="button" disabled>Selesai</button>'
+                            '<button class="button-success-disabled" type="button" disabled>Selesai</button>'
                         )
                     }
 

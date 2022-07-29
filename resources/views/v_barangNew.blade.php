@@ -26,8 +26,8 @@
                 <div id="error-unit"></div>
             </div>
 
-            <button class="barang-new__button-success" type="button" onclick="handleSave()">Simpan</button>
-            <a class="barang-new__button-secondary" href="{{ url()->previous() }}">Kembali</a>
+            <button class="button-success" type="button" onclick="handleSave()">Simpan</button>
+            <a class="button-secondary" href="{{ url()->previous() }}">Kembali</a>
         </div>
     </div>
 

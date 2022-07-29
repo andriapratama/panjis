@@ -16,9 +16,9 @@
         <div id="image-space"></div>
 
         <div>
-            <button class="publikasi-new__button-primary" type="button" onclick="handleAddImage()">Tambah Gambar</button>
-            <button class="publikasi-new__button-success" type="button" onclick="handleSave()">Simpan</button>
-            <a class="publikasi-new__button-secondary" href="{{ url()->previous() }}">Kembali</a>
+            <button class="button-primary-full" type="button" onclick="handleAddImage()">Tambah Gambar</button>
+            <button class="button-success-full" type="button" onclick="handleSave()">Simpan</button>
+            <a class="button-secondary-full" href="{{ url()->previous() }}">Kembali</a>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
                     '<div style="margin-bottom: 20px; display: block;">'+
                         '<div style="display: flex; justify-content: space-between; items-content: center;">'+
                             '<input class="publikasi-new__input-file" style="width: 90%;" type="file" id="image" accept="image/png, image/gif, image/jpeg, image/jpg" data-index="'+index+'" value="'+data.name+'" onchange="handleChangeImage(this)">'+
-                            '<button class="publikasi-new__button-danger type="button" data-index="'+index+'" onclick="handleDeleteColumn(this)">Hapus</button>'+
+                            '<button class="table-button-danger type="button" data-index="'+index+'" onclick="handleDeleteColumn(this)">Hapus</button>'+
                         '</div>'+
                         '<div id="error-image'+index+'"></div>'+
                     '</div>'+

@@ -23,7 +23,9 @@
                 <p class="notulen-detail__desc" id="prihal"></p>
             </div>
 
-            <div style="margin-top: 30px" id="content"></div>
+            <div style="margin-top: 30px; margin-bottom: 20px;" id="content"></div>
+
+            <a class="button-secondary" href="{{ url()->previous() }}">Kembali</a>
         </div>
     </div>
 

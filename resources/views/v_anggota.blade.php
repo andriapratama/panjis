@@ -4,7 +4,7 @@
 @section('content')
 	<div class="anggota__container">
 		<div class="anggota__head">
-			<a class="anggota__button-primary" href="/anggota/new">Tambah</a>
+			<a class="button-primary" href="/anggota/new">Tambah</a>
 		</div>
 
 		<table class="table">
@@ -44,9 +44,9 @@
 								'<td>'+ value.phone_number +'</td>'+
 								'<td>'+
 									'<div class="anggota__table-button">'+
-										'<a class="anggota__table-button-secondary" href="/anggota/detail/'+ value.id +'">Detail</a>'+
-										// '<a class="anggota__table-button-success" href="">Edit</a>'+
-										// '<button class="anggota__table-button-danger">Delete</button>'+
+										'<a class="table-button-secondary" href="/anggota/detail/'+ value.id +'">Detail</a>'+
+										// '<a class="table-button-success" href="">Edit</a>'+
+										// '<button class="table-button-danger">Delete</button>'+
 									'</div>'+
 								'</td>'+
 							'</tr>'

@@ -4,8 +4,8 @@
 @section('content')
 	<div class="bendahara__container">
 		<div class="bendahara__button">
-			<a href="/bendahara/new/in" class="bendahara__button-primary">Pemasukan</a>
-			<a href="/bendahara/new/out" class="bendahara__button-primary">Pengeluaran</a>
+			<a href="/bendahara/new/in" class="button-primary">Pemasukan</a>
+			<a href="/bendahara/new/out" class="button-primary">Pengeluaran</a>
 		</div>
 
 		<table class="table">
@@ -51,7 +51,7 @@
 									'<td><div class="status-in-column">Pemasukan</div></td>'+
 									'<td>'+ numberFormat.format(value.total) +'</td>'+
 									'<td>'+
-										'<a href="/bendahara/detail/'+ value.id +'" class="bendahara__button-table-secondary">Detail</a>'+
+										'<a href="/bendahara/detail/'+ value.id +'" class="table-button-secondary">Detail</a>'+
 									'</td>'+
 								'</tr>'
 							);
@@ -64,7 +64,7 @@
 									'<td><div class="status-out-column">Pengeluaran</div></td>'+
 									'<td>'+ numberFormat.format(value.total) +'</td>'+
 									'<td>'+
-										'<a href="/bendahara/detail/'+ value.id +'" class="bendahara__button-table-secondary">Detail</a>'+
+										'<a href="/bendahara/detail/'+ value.id +'" class="table-button-secondary">Detail</a>'+
 									'</td>'+
 								'</tr>'
 							);

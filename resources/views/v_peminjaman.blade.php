@@ -4,7 +4,7 @@
 @section('content')
     <div class="peminjaman__container">
         <div class="peminjaman__head">
-            <a class="peminjaman__button-primary" href="/peminjaman/new">Tambah</a>
+            <a class="button-primary" href="/peminjaman/new">Tambah</a>
         </div>
 
         <table class="table">
@@ -43,8 +43,8 @@
                                 '<td>'+ value.end_date +'</td>'+
                                 '<td id="status'+index+'"></td>'+
                                 '<td>'+
-                                    '<a class="peminjaman__table-button-secondary" href="/peminjaman/detail/'+value.id+'">Detail</a>'+
-                                    '<a class="peminjaman__table-button-info" target="_blank" href="/peminjaman/print/'+value.id+'">Print</a>'+
+                                    '<a class="table-button-secondary" href="/peminjaman/detail/'+value.id+'">Detail</a>'+
+                                    '<a class="table-button-info" target="_blank" href="/peminjaman/print/'+value.id+'">Print</a>'+
                                 '</td>'+
                             '</tr>'
                         );
