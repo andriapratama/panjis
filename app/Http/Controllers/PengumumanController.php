@@ -9,7 +9,7 @@ class PengumumanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['store', 'update']);
+        $this->middleware('auth')->except(['store', 'update', 'delete']);
     }
 
     public function index()
@@ -75,5 +75,15 @@ class PengumumanController extends Controller
             'status'    => 'true',
             'message'   => 'success to update data'
         ]);
+    }
+
+    public function delete($id)
+    {
+        Announ::where('id', '=', $id)->delete();
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to delete announcement data',
+        ], 200);
     }
 }

@@ -54,6 +54,7 @@ Route::post('/loan/status/{id}', [PeminjamanController::class, 'updateStatus']);
 
 Route::post('/announ', [PengumumanController::class, 'store']);
 Route::post('/announ/update/{id}', [PengumumanController::class, 'update']);
+Route::post('/announ/delete/{id}', [PengumumanController::class, 'delete']);
 
 Route::post('/note', [NotulenController::class, 'store']);
 Route::post('/note/update/{id}', [NotulenController::class, 'update']);

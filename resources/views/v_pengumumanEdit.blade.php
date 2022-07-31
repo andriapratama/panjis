@@ -50,7 +50,6 @@
                 type: 'GET',
                 url: '/announ/' + id,
                 success: function(result) {
-                    console.log(result);
                     const data = result.data;
 
                     title.value = data.title;
