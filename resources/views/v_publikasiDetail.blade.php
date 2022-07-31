@@ -12,12 +12,11 @@
                 <div class="grid"></div>
             </div>
             
-            <a class="button-secondary" href="{{ url()->previous() }}">Kembali</a>
+            <a class="button-secondary" href="/publikasi">Kembali</a>
         </div>
     </div>
 
     @include('js/javascript')
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script type="text/javascript">
         const galleryId = '{{$id}}';
 
@@ -32,24 +31,45 @@
                 success: function(result) {
                     const image = $('.grid').html("");
                     result.data.gallery_detail.forEach((value, index) => {
-                        console.log(value);
                         image.append(
                             '<div class="grid-item">'+
-                                '<img src="/storage/'+ value.path +'" alt="image'+index+'">'+
+                                '<img style="cursor: pointer;" src="/storage/'+ value.path +'" alt="image'+index+'" data-index="'+index+'" onclick="handleShowButtonDelete(this)">'+
+                                '<div class="publikasi-detail__button" id="button-image'+index+'">'+
+                                    '<button class="table-button-danger" type="button" data-id="'+value.id+'" onclick="handleDelete(this)">Hapus</button>'+
+                                    '<button class="table-button-secondary" type="button" data-index="'+index+'" onclick="handleCloseButtonDelete(this)">Tutup</button>'+
+                                '</div>'+
                             '</div>'
                         );
                     });
 
-                    setTimeout(() => {
-                        $('.grid').masonry({
-                            itemSelector: '.grid-item',
-                        });
-                    }, 100);
-
                     $('.publikasi-detail__title').html(result.data.title);
                     $('.publikasi-detail__desc').html(result.data.desc);
                 }
-            })
+            });
+        }
+
+        function handleShowButtonDelete(e) {
+            const index = $(e).data('index');
+
+            $('#button-image'+index+'').attr('style', "z-index: 99 !important;")
+        }
+
+        function handleCloseButtonDelete(e) {
+            const index = $(e).data('index');
+
+            $('#button-image'+index+'').attr('style', "z-index: -1 !important;")
+        }
+
+        function handleDelete(e) {
+            const id = $(e).data('id');
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/gallery/delete/image/' + id,
+                success: function(result) {
+                    showData();
+                }
+            });
         }
     </script>
 @endsection

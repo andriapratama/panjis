@@ -86,6 +86,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	Route::get('/notulen', [NotulenController::class, 'index'])->name('notulen');
 	Route::get('/notulen/new', [NotulenController::class, 'new'])->name('notulen.new');
 	Route::get('/notulen/detail/{id}', [NotulenController::class, 'detail'])->name('notulen.detail');
+	Route::get('/notulen/edit/{id}', [NotulenController::class, 'edit'])->name('notulen.edit');
 	Route::get('/note', [NotulenController::class, 'getData']);
 	Route::get('/note/{id}', [NotulenController::class, 'getOneData']);
 
@@ -100,6 +101,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi');
 	Route::get('/publikasi/new', [PublikasiController::class, 'new'])->name('publikasi.new');
 	Route::get('/publikasi/detail/{id}', [PublikasiController::class, 'detail'])->name('publikasi.detail');
+	Route::get('/publikasi/edit/{id}', [PublikasiController::class, 'edit'])->name('publikasi.edit');
+	Route::get('/publikasi/image/{id}', [PublikasiController::class, 'image'])->name('publikasi.image');
 	Route::get('/gallery', [PublikasiController::class, 'getData']);
 	Route::get('/gallery/{id}', [PublikasiController::class, 'getOneData']);
+	Route::get('/gallery/edit/{id}', [PublikasiController::class, 'getEditData']);
 

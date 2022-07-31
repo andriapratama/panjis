@@ -33,6 +33,7 @@
 
     @include('js/javascript')
     <script type="text/javascript">
+        const id = '{{$id}}';
         let textList = [];
         let date = {value: "", error: false};
         let title = {value: "", error: false};
@@ -48,14 +49,32 @@
         }
 
         $("document").ready(function() {
-            addTextItem();
-            renderTextItem();
+            showData();
         });
 
-        function addTextItem() {
-            textList.push({
-                status: 0,
-                content: "",
+        function showData() {
+            $.ajax({
+                type: 'GET',
+                url: '/note/' + id,
+                success: function(result) {
+                    const data = result.data;
+                    date.value = data.date;
+                    title.value = data.title;
+                    total.value = data.total_member;
+
+                    $('#date').val(data.date);
+                    $('#title').val(data.title);
+                    $('#total').val(data.total_member);
+
+                    data.note_detail.forEach((value, index) => {
+                        textList.push({
+                            status: value.status,
+                            content: value.content,
+                        });
+                    });
+
+                    renderTextItem();
+                }
             });
         }
 
@@ -213,11 +232,11 @@
             const checkText = textList.findIndex((value) => !value.content);
 
             if (date.error === false && title.error === false && total.error === false && checkText === -1) {
-                storeData();
+                updateData();
             }
         }
 
-        function storeData() {
+        function updateData() {
             const formData = new FormData();
             formData.append('date', date.value);
             formData.append('title', title.value);
@@ -230,15 +249,14 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/api/note',
+                url: '/api/note/update/' + id,
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: function(result) {
-                    window.location.href = "/notulen";
+                    window.location.href = "/notulen/detail/" + id;
                 }
             });
         }
-
     </script>
 @endsection

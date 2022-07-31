@@ -28,7 +28,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <select class="admin__input-select" id="role" onchange="handleChangeRole(this)">
+                    <select class="input-select" id="role" onchange="handleChangeRole(this)">
                         <option value="" hidden>Pilih role</option>
                         <option value="1">Admin</option>
                         <option value="2">Sekretaris</option>

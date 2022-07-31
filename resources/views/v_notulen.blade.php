@@ -40,6 +40,7 @@
                                 '<td>'+ value.date +'</td>'+
                                 '<td>'+
                                     '<a class="table-button-secondary" href="/notulen/detail/'+ value.id +'">Detail</a>'+
+                                    '<a class="table-button-success" href="/notulen/edit/'+ value.id +'">Edit</a>'+
                                 '</td>'+
                             '</tr>'
                         );

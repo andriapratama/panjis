@@ -10,9 +10,9 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>No</th>
+					<th style="width: 5%;">No</th>
 					<th>Judul</th>
-					<th>Aksi</th>
+					<th style="width: 25%;">Aksi</th>
 				</tr>
 			</thead>
 			<tbody id="table-body"></tbody>
@@ -39,6 +39,8 @@
 								'<td>' + (value.title) + '</td>'+
 								'<td>'+
 									'<a class="table-button-secondary" href="/publikasi/detail/'+value.id+'">Detail</a>'+
+									'<a class="table-button-success" href="/publikasi/edit/'+value.id+'">Edit</a>'+
+									'<a class="table-button-success" href="/publikasi/image/'+value.id+'">Tambah Gambar</a>'+
 								'</td>'+
 							'</tr>'
 						);

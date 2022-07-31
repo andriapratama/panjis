@@ -10,7 +10,7 @@ class NotulenController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['store']);
+        $this->middleware('auth')->except(['store', 'update']);
     }
 
     public function index()
@@ -26,6 +26,11 @@ class NotulenController extends Controller
     public function detail($id)
     {
         return view('v_notulenDetail', ['id' => $id]);
+    }
+
+    public function edit($id)
+    {
+        return view('v_notulenEdit', ['id' => $id]);
     }
 
     public function store(Request $request)
@@ -68,6 +73,30 @@ class NotulenController extends Controller
             'status'    => 'true',
             'message'   => 'success to get one note data and note detail by id',
             'data'      => $data,
+        ], 200);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = Note::find($id);
+        $data->date = $request['date'];
+        $data->title = $request['title'];
+        $data->total_member = $request['total'];
+        $data->save();
+
+        NoteDetail::where('note_id', '=', $id)->delete();
+
+        foreach($request->textList as $key => $value) {
+            NoteDetail::create([
+                'note_id'   => $id,
+                'content'   => $request->textList[$key]['content'],
+                'status'    => $request->textList[$key]['status'],
+            ]);
+        }
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to update note data'
         ], 200);
     }
 }

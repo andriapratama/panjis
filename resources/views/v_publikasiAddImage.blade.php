@@ -3,15 +3,6 @@
 
 @section('content')
     <div class="publikasi-new__container">
-        <div style="margin-bottom: 20px; display: block;">
-            <input class="input-text" type="text" placeholder="Masukkan Judul gambar" id="title" onkeyup="handleChangeTitle(this)">
-            <div id="error-title"></div>
-        </div>
-
-        <div style="margin-bottom: 13px; display: block;">
-            <textarea class="input-textarea" placeholder="Masukkan deskripsi gambar" onkeyup="handleChangeDesc(this)"></textarea>
-            <div id="error-desc"></div>
-        </div>
 
         <div id="image-space"></div>
 
@@ -24,11 +15,10 @@
 
     @include('js/javascript')
     <script type="text/javascript">
-        let title = "";
-        let desc = "";
+        const id = '{{$id}}';
         let imageFile = [];
 
-         $("document").ready(function() {
+        $("document").ready(function() {
             addImageFile();
             renderImageInput();
         });
@@ -77,25 +67,7 @@
             renderImageInput();
         }
 
-         function handleChangeTitle(e) {
-            const value = $(e).val();
-
-            title = value;
-
-            const element = $('#error-title');
-            element.html("");
-         }
-
-         function handleChangeDesc(e) {
-            const value = $(e).val();
-
-            desc = value;
-
-            const element = $('#error-desc');
-            element.html("");
-         }
-
-         function handleDeleteColumn(e) {
+        function handleDeleteColumn(e) {
             const index = $(e).data('index');
 
             if (imageFile.length === 1) {
@@ -111,9 +83,9 @@
 
                 renderImageInput();
             }
-         }
+        }
 
-         function handleChangeImage(e) {
+        function handleChangeImage(e) {
             const index = $(e).data('index');
             const name = $(e)[0].files[0].name;
             const file = $(e)[0].files[0];
@@ -128,25 +100,9 @@
             element.html("");
 
             renderImageInput();
-         }
+        }
 
-         function handleSave() {
-            if (title === "") {
-                const element = $('#error-title');
-                element.html("");
-                element.append(
-                    '<span class="error">Judul harus diisi</span>'
-                );
-            }
-
-            if (desc === "") {
-                const element = $('#error-desc');
-                element.html("");
-                element.append(
-                    '<span class="error">Deskripsi harus diisi</span>'
-                );
-            }
-
+        function handleSave() {
             imageFile.forEach((data, index) => {
                 if (data.value === null) {
                     const element = $('#error-image'+index+'').html("");
@@ -158,15 +114,13 @@
 
             const checkImage = imageFile.findIndex((data) => !data.value);
 
-            if (title !== "" && desc !== "" && checkImage === -1){
-                storeData();
+            if (checkImage === -1){
+                updateData();
             }
-         }
+        }
 
-         function storeData() {
+        function updateData() {
             const formData = new FormData();
-            formData.append('title', title);
-            formData.append('desc', desc);
 
             imageFile.forEach((data, index) => {
                 formData.append('image['+index+'][value]', data.value);
@@ -174,14 +128,14 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/api/gallery',
+                url: '/api/gallery/image/' + id,
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: function(result) {
-                    window.location.href = "/publikasi";
+                    window.location.href = "/publikasi/detail/" + id;
                 }
             });
-         }
+        }
     </script>
 @endsection

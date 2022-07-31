@@ -10,7 +10,7 @@ class PublikasiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['store']);
+        $this->middleware('auth')->except(['store', 'update', 'storeImage', 'deleteImage']);
     }
 
     public function index()
@@ -26,6 +26,16 @@ class PublikasiController extends Controller
     public function detail($id)
     {
         return view('v_publikasiDetail', ['id' => $id]);
+    }
+
+    public function edit($id)
+    {
+        return view('v_publikasiEdit', ['id' => $id]);
+    }
+
+    public function image($id)
+    {
+        return view('v_publikasiAddImage', ['id' => $id]);
     }
 
     public function store(Request $request)
@@ -71,6 +81,59 @@ class PublikasiController extends Controller
             'status'    => 'true',
             'message'   => 'success get one data by id',
             'data'      => $data
+        ], 200);
+    }
+
+    public function getEditData($id)
+    {
+        $data = Gallery::find($id);
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to get one gallery data for edit',
+            'data'      => $data,
+        ], 200);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = Gallery::find($id);
+        $data->title = $request['title'];
+        $data->desc = $request['desc'];
+        $data->save();
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to update gallery data',
+        ], 200);
+    }
+
+    public function storeImage(Request $request, $id)
+    {
+        foreach($request->file('image') as $key => $value) {
+            $name = $value['value']->getClientOriginalname();
+            $path = $value['value']->store('uploads', 'public');
+
+            GalleryDetail::create([
+                'gallery_id'    => $id,
+                'name'          => $name,
+                'path'          => $path
+            ]);
+        }
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to store image to gallery detail',
+        ], 201);
+    }
+
+    public function deleteImage($id)
+    {
+        GalleryDetail::where('id', '=', $id)->delete();
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to delete image',
         ], 200);
     }
 }

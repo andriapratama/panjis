@@ -35,6 +35,9 @@ Route::post('/transaction', [BendaharaController::class, 'store']);
 Route::post('/transaction/update/{id}', [BendaharaController::class, 'update']);
 
 Route::post('/gallery', [PublikasiController::class, 'store']);
+Route::post('/gallery/update/{id}', [PublikasiController::class, 'update']);
+Route::post('/gallery/image/{id}', [PublikasiController::class, 'storeImage']);
+Route::post('/gallery/delete/image/{id}', [PublikasiController::class, 'deleteImage']);
 
 Route::post('/member', [AnggotaController::class, 'store']);
 Route::post('/member/update/{id}', [AnggotaController::class, 'update']);
@@ -53,6 +56,7 @@ Route::post('/announ', [PengumumanController::class, 'store']);
 Route::post('/announ/update/{id}', [PengumumanController::class, 'update']);
 
 Route::post('/note', [NotulenController::class, 'store']);
+Route::post('/note/update/{id}', [NotulenController::class, 'update']);
 
 Route::post('/report', [LpjController::class, 'store']);
 Route::post('/report/update/title/{id}', [LpjController::class, 'updateTitle']);
