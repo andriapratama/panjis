@@ -5,31 +5,31 @@
     <div class="peminjaman-new__container">
         <div style="margin-bottom: 20px; display: block;">
             <label for="name-humas">Nama Humas</label>
-            <input class="peminjaman-new__input-text" type="text" placeholder="Masukkan nama humas" id="name-humas" onkeyup="handleChangeHumasName(this)">
+            <input class="input-text" type="text" placeholder="Masukkan nama humas" id="name-humas" onkeyup="handleChangeHumasName(this)">
             <div id="error-humas-name"></div>
         </div>
 
         <div style="margin-bottom: 20px; display: block;">
             <label for="name">Nama Peminjam</label>
-            <input class="peminjaman-new__input-text" type="text" placeholder="Masukkan nama peminjam" id="name" onkeyup="handleChangeName(this)">
+            <input class="input-text" type="text" placeholder="Masukkan nama peminjam" id="name" onkeyup="handleChangeName(this)">
             <div id="error-name"></div>
         </div>
 
         <div style="margin-bottom: 20px; display: block;">
             <label for="address">Alamat Peminjam</label>
-            <input class="peminjaman-new__input-text" type="text" placeholder="Masukkan alamat peminjam" id="address" onkeyup="handleChangeAddress(this)">
+            <input class="input-text" type="text" placeholder="Masukkan alamat peminjam" id="address" onkeyup="handleChangeAddress(this)">
             <div id="error-address"></div>
         </div>
 
         <div style="margin-bottom: 20px; display: block;">
             <label for="phone">No. Telp</label>
-            <input class="peminjaman-new__input-text" type="text" placeholder="Masukkan no telepon peminjam" id="phone" onkeyup="handleChangePhone(this)">
+            <input class="input-text" type="text" placeholder="Masukkan no telepon peminjam" id="phone" onkeyup="handleChangePhone(this)">
             <div id="error-phone"></div>
         </div>
 
         <div style="margin-bottom: 20px; display: block;">
             <label for="startDate">Tanggal Mulai</label>
-            <input class="peminjaman-new__input-date" type="date" id="startDate" onchange="handleChangesStartDate(this)">
+            <input class="input-date" type="date" id="startDate" onchange="handleChangesStartDate(this)">
             <div id="error-start-date"></div>
         </div>
 
@@ -96,17 +96,16 @@
         }
 
         function renderTransactionItem() {
-            const element = $('#table-body');
-            element.html("");
+            const element = $('#table-body').html("");
             transactionList.forEach((value, index) => {
                 element.append(
                     '<tr>'+
                         '<td>'+
-                            '<select class="peminjaman-new__input-select" id="select-product'+index+'" value="1" data-index="'+ index +'" onchange="handleChangeProduct(this)"></select>'+
+                            '<select class="input-select" id="select-product'+index+'" value="1" data-index="'+ index +'" onchange="handleChangeProduct(this)"></select>'+
                             '<div id="error-product'+index+'"></div>'+
                         '</td>'+
                         '<td>'+
-                            '<input class="peminjaman-new__input-text" type="number" placeholder="Masukkan Jumlah" data-index="'+ index +'" value="'+ parseInt(value.quantity) +'" onkeyup="handleChangeQuantity(this)">'+
+                            '<input class="input-text" type="number" placeholder="Masukkan Jumlah" data-index="'+ index +'" value="'+ parseInt(value.quantity) +'" onkeyup="handleChangeQuantity(this)">'+
                             '<div id="error-quantity'+index+'"></div>'+
                         '</td>'+
                         '<td>'+
