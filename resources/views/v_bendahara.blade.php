@@ -23,8 +23,30 @@
 		</table>
 	</div>
 
+	<!-- Delete Modal -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4 style="text-align: center;">Apa anda yakin ingin menghapus data transaksi?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="handleDelete()">Hapus</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @include('js/javascript')
 	<script type="text/javascript">
+		let id = null;
 		let numberFormat = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR"});
 
 		$("document").ready(function() {
@@ -51,6 +73,7 @@
 								'<td>'+
 									'<a href="/bendahara/detail/'+ value.id +'" class="table-button-secondary">Detail</a>'+
 									'<a href="/bendahara/edit/'+ value.id +'" class="table-button-success">Edit</a>'+
+									'<button class="table-button-danger" type="button" data-toggle="modal" data-target="#delete-modal" data-id="'+value.id+'" onclick="handleSetId(this)">Hapus</button>'+
 								'</td>'+
 							'</tr>'
 						);
@@ -66,6 +89,24 @@
 							);
 						}
 					});
+				}
+			});
+		}
+
+		function handleSetId(e) {
+			id = $(e).data('id');
+
+			console.log(id);
+		}
+
+		function handleDelete() {
+			$.ajax({
+				type: 'POST',
+				url: '/api/transaction/delete/' + id,
+				success: function(result) {
+					$('#delete-modal').modal('hide');
+
+					showTransactionList();
 				}
 			});
 		}

@@ -39,11 +39,12 @@ p {
 .lpj-new__container,
 .lpj-edit__container,
 .admin__container,
-.publikasi__container {
+.publikasi__container,
+.home__container {
     width: 100%;
     background: white;
     padding: 20px;
-    border: 1px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     margin-bottom: 20px;
 }
@@ -73,7 +74,7 @@ p {
     border-radius: 10px;
     padding: 30px;
     background-color: #ffffff;
-    border: 1px solid #000000;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
 }
 
@@ -500,6 +501,55 @@ p {
     width: 570px;
     margin-left: 5px;
     text-align: justify;
+}
+
+.home__head {
+    width: 100%;
+}
+
+.home__head-body {
+    width: 100%;
+    background-color: rgba(242, 59, 59, 0.6);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.home__body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.home__body-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.home__card {
+    width: 360px;
+    height: 150px;
+    background-color: rgba(89, 208, 244, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.home__card i {
+    font-size: 40px;
+    transition: 500ms ease-out;
+}
+
+.home__card:hover i {
+    transform: scale(1.2);
+    transition: 500ms ease-out;
+    transform: rotate(20deg);
 }
 
 .flex-align-center {

@@ -33,6 +33,7 @@ Auth::routes();
 
 Route::post('/transaction', [BendaharaController::class, 'store']);
 Route::post('/transaction/update/{id}', [BendaharaController::class, 'update']);
+Route::post('/transaction/delete/{id}', [BendaharaController::class, 'delete']);
 
 Route::post('/gallery', [PublikasiController::class, 'store']);
 Route::post('/gallery/update/{id}', [PublikasiController::class, 'update']);

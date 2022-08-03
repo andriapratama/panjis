@@ -10,7 +10,7 @@ class BendaharaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['store', 'update']);
+        $this->middleware('auth')->except(['store', 'update', 'delete']);
     }
 
     public function index()
@@ -100,6 +100,18 @@ class BendaharaController extends Controller
         return response()->json([
             'status'    => 'true',
             'message'   => 'success to update data transaction',
+        ], 200);
+    }
+
+    public function delete($id)
+    {
+        TransactionDetail::where('transaction_id', '=', $id)->delete();
+
+        Transaction::where('id', '=', $id)->delete();
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'succes to delete transaction data',
         ], 200);
     }
 }
