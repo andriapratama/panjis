@@ -35,7 +35,7 @@
 
         <div style="margin-bottom: 20px; display: block;">
             <label for="endDate">Tanggal Akhir</label>
-            <input class="peminjaman-new__input-date" type="date" id="endDate" onchange="handleChangeEndDate(this)">
+            <input class="input-date" type="date" id="endDate" onchange="handleChangeEndDate(this)">
             <div id="error-end-date"></div>
         </div>
 
@@ -58,11 +58,21 @@
 
         const today = new Date();
         const month = (today.getMonth()+1);
+        const day = today.getDate();
+
         let dateToday = "";
         if (parseInt(month) < 10) {
-            dateToday = today.getFullYear()+'-'+"0"+(today.getMonth()+1)+'-'+today.getDate();
+            if (parseInt(day) < 10) {
+                dateToday = today.getFullYear()+'-0'+(today.getMonth()+1)+'-0'+today.getDate();
+            } else {
+                dateToday = today.getFullYear()+'-0'+(today.getMonth()+1)+'-'+today.getDate();
+            }
         } else {
-            dateToday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            if (parseInt(day) < 10) {
+                dateToday = today.getFullYear()+'-'+(today.getMonth()+1)+'-0'+today.getDate();
+            } else {
+                dateToday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            }
         }
 
         $("document").ready(function() {

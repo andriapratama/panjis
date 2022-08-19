@@ -33,11 +33,21 @@
 
         const today = new Date();
         const month = (today.getMonth()+1);
+        const day = today.getDate();
+
         let dateToday = "";
         if (parseInt(month) < 10) {
-            dateToday = today.getFullYear()+'-'+"0"+(today.getMonth()+1)+'-'+today.getDate();
+            if (parseInt(day) < 10) {
+                dateToday = today.getFullYear()+'-0'+(today.getMonth()+1)+'-0'+today.getDate();
+            } else {
+                dateToday = today.getFullYear()+'-0'+(today.getMonth()+1)+'-'+today.getDate();
+            }
         } else {
-            dateToday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            if (parseInt(day) < 10) {
+                dateToday = today.getFullYear()+'-'+(today.getMonth()+1)+'-0'+today.getDate();
+            } else {
+                dateToday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            }
         }
 
         function handleChangeTitle(e) {

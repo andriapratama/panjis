@@ -539,6 +539,7 @@ p {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
 .home__card i {
@@ -547,9 +548,44 @@ p {
 }
 
 .home__card:hover i {
-    transform: scale(1.2);
     transition: 500ms ease-out;
-    transform: rotate(20deg);
+    transform: scale(1.2) rotate(20deg);
+}
+
+.carousel a {
+    z-index: 20 !important;
+}
+
+.main__carousel-logo {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main__announ {
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: fi;
+}
+
+.main__announ-body {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(212, 11, 11, 0.7);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.main__announ-body h4 {
+    margin-bottom: 0;
 }
 
 .flex-align-center {

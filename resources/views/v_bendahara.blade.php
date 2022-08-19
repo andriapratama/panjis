@@ -58,8 +58,7 @@
 				type: "GET",
 				url: "/transaction",
 				success: function(result) {
-					const element = $('#table-body');
-					element.html("");
+					const element = $('#table-body').html("");
 					result.data.forEach((value, index) => {
 						const date = new Date(value.created_at);
 						const dateFormat = new Intl.DateTimeFormat(['ban', 'id']).format(date);
@@ -95,8 +94,6 @@
 
 		function handleSetId(e) {
 			id = $(e).data('id');
-
-			console.log(id);
 		}
 
 		function handleDelete() {
@@ -107,6 +104,8 @@
 					$('#delete-modal').modal('hide');
 
 					showTransactionList();
+
+					id = null;
 				}
 			});
 		}

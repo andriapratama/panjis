@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Announ;
+use Carbon\Carbon;
 
 class PengumumanController extends Controller
 {
@@ -59,6 +60,19 @@ class PengumumanController extends Controller
         return response()->json([
             'status'    => 'true',
             'message'   => 'success get one announcement data by id',
+            'data'      => $data,
+        ], 200);
+    }
+
+    public function getDataByDate()
+    {
+        $today = Carbon::now()->format('Y-m-d');
+
+        $data = Announ::where('date', '>', $today)->orderBy('date', 'ASC')->get();
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to get data by date',
             'data'      => $data,
         ], 200);
     }

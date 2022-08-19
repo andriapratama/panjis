@@ -80,6 +80,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	Route::get('/pengumuman/new', [PengumumanController::class, 'new'])->name('pengumuman.new');
 	Route::get('/pengumuman/edit/{id}', [PengumumanController::class, 'edit'])->name('pengumuman.edit');
 	Route::get('/announ', [PengumumanController::class, 'getData']);
+	Route::get('/announ/date', [PengumumanController::class, 'getDataByDate']);
 	Route::get('/announ/{id}', [PengumumanController::class, 'getOneData']);
 
 	//Notulen
