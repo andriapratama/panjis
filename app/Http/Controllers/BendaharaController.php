@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BendaharaController extends Controller
 {
@@ -35,11 +37,30 @@ class BendaharaController extends Controller
 
     public function store(Request $request)
     {
+        $lastTransaction = Transaction::orderBy("created_at", "DESC")->first();
+
+        $totalCash = 0;
+
+        if (!$lastTransaction) {
+            if ($request['status'] === "in") {
+                $totalCash = $totalCash + $request['total'];
+            } else if ($request['status'] === "out") {
+                $totalCash = $totalCash - $request['total'];
+            }
+        } else {
+            if ($request['status'] === "in") {
+                $totalCash = $lastTransaction['total_cash'] + $request['total'];
+            } else if ($request['status'] === "out") {
+                $totalCash = $lastTransaction['total_cash'] - $request['total'];
+            }
+        }
+
         $transaction = Transaction::create([
-            'user_id'   => $request['userId'],
-            'title'     => $request['title'],
-            'status'    => $request['status'],
-            'total'     => $request['total'],
+            'user_id'       => $request['userId'],
+            'title'         => $request['title'],
+            'status'        => $request['status'],
+            'total'         => $request['total'],
+            'total_cash'    => $totalCash,
         ]);
 
         foreach($request->transactionList as $key => $value) {
@@ -78,8 +99,56 @@ class BendaharaController extends Controller
         ], 200);
     }
 
+    public function getTotalMoney()
+    {
+        $lastTransaction = Transaction::orderBy("created_at", "DESC")->first();
+
+        $totalCash = 0;
+
+        if (!$lastTransaction) {
+            $totalCash = 0;
+        } else {
+            $totalCash = $lastTransaction['total_cash'];
+        }
+
+        $month = Carbon::now()->format('m');
+        $year = Carbon::now()->format('Y');
+
+        $totalIncome = DB::table('transactions')
+                        ->where('status', '=', "in")
+                        ->whereMonth('created_at', '=', $month)
+                        ->whereYear('created_at', '=', $year)
+                        ->sum('total');
+
+        $totalSpending = DB::table('transactions')
+                        ->where('status', '=', "out")
+                        ->whereMonth('created_at', '=', $month)
+                        ->whereYear('created_at', '=', $year)
+                        ->sum('total');
+
+        return response()->json([
+            'status'            => 'true',
+            'message'           => 'Success to get total money',
+            'totalCash'         => $totalCash,
+            'totalIncome'       => (int)$totalIncome,
+            'totalSpending'     => (int)$totalSpending,
+        ], 200);
+    }
+
     public function update(Request $request, $id)
     {
+        $findTransaction = Transaction::find($id);
+
+        $findLastTransaction = Transaction::orderBy('created_at', 'DESC')->first();
+
+        $totalCash = 0;
+
+        if ($findTransaction['status'] === "in") {
+            $totalCash = $findLastTransaction['total_cash'] - $findTransaction['total'];
+        } else if ($findTransaction['status'] === "out") {
+            $totalCash = $findLastTransaction['total_cash'] + $findTransaction['total'];
+        }
+
         $data = Transaction::find($id);
         $data->user_id = $request['userId'];
         $data->title = $request['title'];
@@ -97,6 +166,15 @@ class BendaharaController extends Controller
             ]);
         }
 
+        if ($request['status'] === "in") {
+            $totalCash = $totalCash + $request['total'];
+        } else if ($request['status'] === 'out') {
+            $totalCash = $totalCash - $request['total'];
+        }
+
+        $findLastTransaction->total_cash = $totalCash;
+        $findLastTransaction->save();
+
         return response()->json([
             'status'    => 'true',
             'message'   => 'success to update data transaction',
@@ -105,13 +183,47 @@ class BendaharaController extends Controller
 
     public function delete($id)
     {
+        $findTransaction = Transaction::find($id);
+
+        $findLastTransaction = Transaction::orderBy('created_at', 'DESC')->first();
+
+        $totalCash = 0;
+
+        if ($findTransaction['status'] === "in") {
+            $totalCash = $findLastTransaction['total_cash'] - $findTransaction['total'];
+        } else if ($findTransaction['status'] === "out") {
+            $totalCash = $findLastTransaction['total_cash'] + $findTransaction['total'];
+        }
+
         TransactionDetail::where('transaction_id', '=', $id)->delete();
 
         Transaction::where('id', '=', $id)->delete();
 
-        return response()->json([
-            'status'    => 'true',
-            'message'   => 'succes to delete transaction data',
-        ], 200);
+        if ($findTransaction['id'] === $findLastTransaction['id']) {
+            $lastTransaction = Transaction::orderBy('created_at', 'DESC')->first();
+
+            if (!$lastTransaction) {
+                return response()->json([
+                    'status'    => 'true',
+                    'message'   => 'succes to delete transaction data',
+                ], 200);
+            } else {
+                $lastTransaction->total_cash = $totalCash;
+                $lastTransaction->save();
+    
+                return response()->json([
+                    'status'    => 'true',
+                    'message'   => 'succes to delete transaction data',
+                ], 200);
+            }
+        } else {
+            $findLastTransaction->total_cash = $totalCash;
+            $findLastTransaction->save();
+
+            return response()->json([
+                'status'    => 'false',
+                'message'   => 'succes to delete transaction data',
+            ], 200);
+        }
     }
 }

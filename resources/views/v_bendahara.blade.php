@@ -3,6 +3,30 @@
 
 @section('content')
 	<div class="bendahara__container">
+		<div class="bendahara__header">
+			<div class="bendahara__card">
+				<div class="bendahara__card-left">
+					<h4>Total Uang Kas</h4>
+					<h2 id="cash"></h2>
+				</div>
+				<i class="fas fa-wallet"></i>
+			</div>
+			<div class="bendahara__card">
+				<div class="bendahara__card-left">
+					<h4>Total Pemasukan</h4>
+					<h2 id="income"></h2>
+				</div>
+				<i class="fas fa-arrow-down"></i>
+			</div>
+			<div class="bendahara__card">
+				<div class="bendahara__card-left">
+					<h4>Total Pengeluaran</h4>
+					<h2 id="spending"></h2>
+				</div>
+				<i class="fas fa-arrow-up"></i>
+			</div>
+		</div>
+
 		<div class="bendahara__button">
 			<a href="/bendahara/new/in" class="button-primary">Pemasukan</a>
 			<a href="/bendahara/new/out" class="button-primary">Pengeluaran</a>
@@ -51,7 +75,31 @@
 
 		$("document").ready(function() {
 			showTransactionList();
+			showTotalMoney();
 		});
+
+		function showTotalMoney() {
+			$.ajax({
+				type: "GET",
+				url: '/transaction/money',
+				success: function(result) {
+					const cash = $('#cash').html("");
+					if (result.totalCash < 0) {
+						cash.append(
+							'<span style="color: red;">'+numberFormat.format(result.totalCash)+'</span>'
+						)
+					} else {
+						cash.append(numberFormat.format(result.totalCash));
+					}
+					
+					const income = $('#income').html("");
+					income.append(numberFormat.format(result.totalIncome));
+					
+					const spending = $('#spending').html("");
+					spending.append(numberFormat.format(result.totalSpending));
+				}
+			});
+		}
 
 		function showTransactionList() {
 			$.ajax({
@@ -102,8 +150,10 @@
 				url: '/api/transaction/delete/' + id,
 				success: function(result) {
 					$('#delete-modal').modal('hide');
+					location.reload(true);
 
 					showTransactionList();
+					showTotalMoney();
 
 					id = null;
 				}

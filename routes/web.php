@@ -58,6 +58,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	Route::get('/bendahara/detail/{id}', [BendaharaController::class, 'detail'])->name('bendahara.detail');
 	Route::get('/bendahara/edit/{id}', [BendaharaController::class, 'edit'])->name('bendahara.edit');
 	Route::get('/transaction', [BendaharaController::class, 'getData']);
+	Route::get('/transaction/money', [BendaharaController::class, 'getTotalMoney']);
 	Route::get('/transaction/{id}', [BendaharaController::class, 'getOneData']);
 
 	//Barang

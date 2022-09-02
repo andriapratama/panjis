@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->string('title');
             $table->enum('status', ['in', 'out']);
             $table->integer('total');
+            $table->integer('total_cash');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

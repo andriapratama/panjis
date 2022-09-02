@@ -240,6 +240,37 @@ p {
     position: relative;
 }
 
+.bendahara__header {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.bendahara__card {
+    width: 360px;
+    height: 130px;
+    background-color: rgba(89, 208, 244, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.bendahara__card i {
+    font-size: 40px;
+    transition: 500ms ease-out;
+}
+
+.bendahara__card:hover i {
+    transition: 500ms ease-out;
+    transform: scale(1.2) rotate(20deg);
+}
+
 .bendahara-transaksi__rp {
     padding: 5px;
     background-color: rgb(210, 210, 210);
