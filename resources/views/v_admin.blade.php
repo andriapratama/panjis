@@ -15,6 +15,8 @@
             </thead>
             <tbody id="table-body"></tbody>
         </table>
+
+        <div class="pagination-container" id="pagination"></div>
     </div>
 
     <!-- Edit Role Modal -->
@@ -50,6 +52,7 @@
     <script type="text/javascript">
         let id = null;
         let role = null;
+        let page = "/user";
 
         $("document").ready(function() {
             showData();
@@ -58,41 +61,84 @@
         function showData() {
             $.ajax({
                 type: 'GET',
-                url: '/user',
+                url: page,
                 success: function(result) {
-                    const el = $('#table-body').html("");
-                    result.data.forEach((value, index) => {
-                        el.append(
+                    const element = $('#table-body').html("");
+                    if (result.data.data.length === 0) {
+                        element.append(
                             '<tr>'+
-                                '<td>'+ (index+1) +'</td>'+
-                                '<td>'+ value.name +'</td>'+
-                                '<td>'+ value.email +'</td>'+
-                                '<td id="role'+index+'"></td>'+
-                                '<td>'+
-                                    '<button class="table-button-secondary" type="button" data-toggle="modal" data-target="#edit-modal" data-id="'+value.id+'" data-role="'+value.level+'" onclick="handleEditRoleModal(this)">Edit Role</button>'+
-                                '</td>'+
-                            '</tr>'
+								'<td class="empty-data" colSpan="6">Data Kosong</td>'+
+							'</tr>'
                         );
+                    } else {
+                        result.data.data.forEach((value, index) => {
+                            element.append(
+                                '<tr>'+
+                                    '<td>'+ (index+1) +'</td>'+
+                                    '<td>'+ value.name +'</td>'+
+                                    '<td>'+ value.email +'</td>'+
+                                    '<td id="role'+index+'"></td>'+
+                                    '<td>'+
+                                        '<button class="table-button-secondary" type="button" data-toggle="modal" data-target="#edit-modal" data-id="'+value.id+'" data-role="'+value.level+'" onclick="handleEditRoleModal(this)">Edit Role</button>'+
+                                    '</td>'+
+                                '</tr>'
+                            );
+    
+                            const roleEl = $('#role'+index+'')
+    
+                            if (value.level === 1) {
+                                roleEl.html("Admin");
+                            } else if (value.level === 2) {
+                                roleEl.html("Sekretaris");
+                            } else if (value.level === 3) {
+                                roleEl.html("Bendahara");
+                            } else if (value.level === 4) {
+                                roleEl.html("Anggota");
+                            } else if (value.level === 5) {
+                                roleEl.html("Pengembangan");
+                            } else if (value.level === 6) {
+                                roleEl.html("Publikasi");
+                            }
+                        });
+                    }
 
-                        const roleEl = $('#role'+index+'')
-
-                        if (value.level === 1) {
-                            roleEl.html("Admin");
-                        } else if (value.level === 2) {
-                            roleEl.html("Sekretaris");
-                        } else if (value.level === 3) {
-                            roleEl.html("Bendahara");
-                        } else if (value.level === 4) {
-                            roleEl.html("Anggota");
-                        } else if (value.level === 5) {
-                            roleEl.html("Pengembangan");
-                        } else if (value.level === 6) {
-                            roleEl.html("Publikasi");
-                        }
-                    });
+                    const el = $('#pagination').html("");
+					result.data.links.forEach((value, index) => {
+						if (value.url === null) {
+							el.append(
+								null
+							)
+						} else {
+							if (value.active === true) {
+								el.append(
+									'<span class="pagination active" data-url="'+value.url+'" onclick="handlePagination(this)">'+value.label+'</span>'
+								);
+							} else {
+								if (value.label === "&laquo; Previous") {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)"><i class="fas fa-chevron-left"></i></span>'
+									);
+								} else if (value.label === "Next &raquo;") {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)"><i class="fas fa-chevron-right"></i></span>'
+									);
+								} else {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)">'+value.label+'</span>'
+									);
+								}
+							}
+						}
+					});
                 }
             });
         }
+
+        function handlePagination(e) {
+			const url = $(e).data('url');
+			page = url;
+			showData();
+		}
 
         function handleEditRoleModal(e) {
             id = $(e).data('id');
@@ -127,6 +173,8 @@
                     id = null;
                     role = null;
                     $('#edit-modal').modal('hide');
+					$('.modal-backdrop').remove();
+
                     showData();
                 }
             });

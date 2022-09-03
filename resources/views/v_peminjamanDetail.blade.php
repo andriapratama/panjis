@@ -65,7 +65,6 @@
                 type: 'GET',
                 url: '/loan/' + loanId,
                 success: function(result) {
-                    console.log(result);
                     $('#humas-name').html(result.loan.humas_name);
                     $('#name').html(result.loan.name);
                     $('#address').html(result.loan.address);

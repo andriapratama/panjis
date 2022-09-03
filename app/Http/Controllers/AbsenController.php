@@ -100,7 +100,7 @@ class AbsenController extends Controller
 
     public function getData()
     {
-        $data = Absent::orderBy('id', 'DESC')->get();
+        $data = Absent::orderBy('id', 'DESC')->paginate(10);
 
         return response()->json([
             'status'    => 'true',

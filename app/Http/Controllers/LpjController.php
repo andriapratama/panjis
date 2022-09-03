@@ -45,7 +45,7 @@ class LpjController extends Controller
 
     public function getData()
     {
-        $data = Report::orderBy('created_at', 'DESC')->get();
+        $data = Report::orderBy('created_at', 'DESC')->paginate(10);
 
         return response()->json([
             'status'    => 'true',

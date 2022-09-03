@@ -79,7 +79,7 @@ class BendaharaController extends Controller
 
     public function getData()
     {
-        $transaction = Transaction::orderBy("created_at", "DESC")->get();
+        $transaction = Transaction::orderBy("created_at", "DESC")->paginate(10);
 
         return response()->json([
             'status'    => 'true',

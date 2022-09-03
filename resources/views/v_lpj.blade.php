@@ -17,6 +17,8 @@
             </thead>
             <tbody id="table-body"></tbody>
         </table>
+
+        <div class="pagination-container" id="pagination"></div>
     </div>
 
     <!-- Edit Title Modal -->
@@ -68,6 +70,7 @@
         let id = null;
         let title = {value: "", error: false};
         let file = {value: null, error: false};
+        let page = "/report";
 
         $("document").ready(function() {
             showData();
@@ -76,25 +79,69 @@
         function showData() {
             $.ajax({
                 type: 'GET',
-                url: '/report',
+                url: page,
                 success: function(result) {
-                    const el = $('#table-body').html("");
-                    result.data.forEach((value, index) => {
-                        el.append(
+                    const element = $('#table-body').html("");
+
+                    if (result.data.data.length === 0) {
+                        element.append(
                             '<tr>'+
-                                '<td>'+ (index+1) +'</td>'+
-                                '<td>'+ value.title +'</td>'+
-                                '<td>'+
-                                    '<button class="table-button-success" data-toggle="modal" data-target="#edit-title" data-id="'+value.id+'" onclick="handleEditTitle(this)">Edit Judul</button>'+
-                                    '<button class="table-button-success" data-toggle="modal" data-target="#edit-file" data-id="'+value.id+'" onclick="handleEditFile(this)">Edit File</button>'+
-                                    '<a class="table-button-secondary" target="_blank" href="/storage/'+ value.file +'">Lihat PDF</a>'+
-                                '</td>'+
-                            '</tr>'
+								'<td class="empty-data" colSpan="6">Data Kosong</td>'+
+							'</tr>'
                         );
-                    });
+                    } else {
+                        result.data.data.forEach((value, index) => {
+                            element.append(
+                                '<tr>'+
+                                    '<td>'+ (index+1) +'</td>'+
+                                    '<td>'+ value.title +'</td>'+
+                                    '<td>'+
+                                        '<button class="table-button-success" data-toggle="modal" data-target="#edit-title" data-id="'+value.id+'" onclick="handleEditTitle(this)">Edit Judul</button>'+
+                                        '<button class="table-button-success" data-toggle="modal" data-target="#edit-file" data-id="'+value.id+'" onclick="handleEditFile(this)">Edit File</button>'+
+                                        '<a class="table-button-secondary" target="_blank" href="/storage/'+ value.file +'">Lihat PDF</a>'+
+                                    '</td>'+
+                                '</tr>'
+                            );
+                        });
+                    }
+
+                    const el = $('#pagination').html("");
+					result.data.links.forEach((value, index) => {
+						if (value.url === null) {
+							el.append(
+								null
+							)
+						} else {
+							if (value.active === true) {
+								el.append(
+									'<span class="pagination active" data-url="'+value.url+'" onclick="handlePagination(this)">'+value.label+'</span>'
+								);
+							} else {
+								if (value.label === "&laquo; Previous") {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)"><i class="fas fa-chevron-left"></i></span>'
+									);
+								} else if (value.label === "Next &raquo;") {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)"><i class="fas fa-chevron-right"></i></span>'
+									);
+								} else {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)">'+value.label+'</span>'
+									);
+								}
+							}
+						}
+					});
                 }
             });
         }
+
+        function handlePagination(e) {
+			const url = $(e).data('url');
+			page = url;
+			showData();
+		}
 
         function handleEditTitle(e) {
             id = $(e).data('id');
@@ -138,7 +185,9 @@
                     processData: false,
                     success: function(result) {
                         showData();
+
                         $('#edit-title').modal('hide');
+					    $('.modal-backdrop').remove();
                     }
                 });
             }
@@ -176,7 +225,9 @@
                     processData: false,
                     success: function(result) {
                         showData();
+                        
                         $('#edit-file').modal('hide');
+					    $('.modal-backdrop').remove();
                     }
                 });
             }

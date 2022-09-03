@@ -19,7 +19,7 @@ class AdminController extends Controller
 
     public function getData()
     {
-        $data = User::get();
+        $data = User::paginate(10);
 
         return response()->json([
             'status'    => 'true',

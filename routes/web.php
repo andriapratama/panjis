@@ -28,7 +28,9 @@ Route::get('/', [IndexController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+	//Home
+	Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+	Route::get('/home/data', [HomeController::class, 'getData']);
 
 	//Admin
 	Route::get('/admin', [AdminController::class, 'index'])->name('admin');
@@ -66,6 +68,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	Route::get('/barang/new', [BarangController::class, 'new'])->name('barang.new');
 	Route::get('/barang/edit/{id}', [BarangController::class, 'edit'])->name('barang.edit');
 	Route::get('/product', [BarangController::class, 'getData']);
+	Route::get('/product/all', [BarangController::class, 'getAllData']);
 	Route::get('/product/{id}', [BarangController::class, 'getOneData']);
 
 	//Peminjaman

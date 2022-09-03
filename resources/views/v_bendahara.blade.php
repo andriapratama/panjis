@@ -45,6 +45,8 @@
 			</thead>
 			<tbody id="table-body"></tbody>
 		</table>
+
+		<div class="pagination-container" id="pagination"></div>
 	</div>
 
 	<!-- Delete Modal -->
@@ -72,6 +74,7 @@
 	<script type="text/javascript">
 		let id = null;
 		let numberFormat = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR"});
+		let page = "/transaction";
 
 		$("document").ready(function() {
 			showTransactionList();
@@ -104,40 +107,83 @@
 		function showTransactionList() {
 			$.ajax({
 				type: "GET",
-				url: "/transaction",
+				url: page,
 				success: function(result) {
 					const element = $('#table-body').html("");
-					result.data.forEach((value, index) => {
-						const date = new Date(value.created_at);
-						const dateFormat = new Intl.DateTimeFormat(['ban', 'id']).format(date);
+					if (result.data.data.length === 0) {
 						element.append(
 							'<tr>'+
-								'<td>'+ (index+1) +'</td>'+
-								'<td>'+ dateFormat +'</td>'+
-								'<td>'+ value.title +'</td>'+
-								'<td id="status'+index+'"></td>'+
-								'<td>'+ numberFormat.format(value.total) +'</td>'+
-								'<td>'+
-									'<a href="/bendahara/detail/'+ value.id +'" class="table-button-secondary">Detail</a>'+
-									'<a href="/bendahara/edit/'+ value.id +'" class="table-button-success">Edit</a>'+
-									'<button class="table-button-danger" type="button" data-toggle="modal" data-target="#delete-modal" data-id="'+value.id+'" onclick="handleSetId(this)">Hapus</button>'+
-								'</td>'+
+								'<td class="empty-data" colSpan="6">Data Kosong</td>'+
 							'</tr>'
 						);
+					} else {
+						result.data.data.forEach((value, index) => {
+							const date = new Date(value.created_at);
+							const dateFormat = new Intl.DateTimeFormat(['ban', 'id']).format(date);
+							element.append(
+								'<tr>'+
+									'<td>'+ (index+1) +'</td>'+
+									'<td>'+ dateFormat +'</td>'+
+									'<td>'+ value.title +'</td>'+
+									'<td id="status'+index+'"></td>'+
+									'<td>'+ numberFormat.format(value.total) +'</td>'+
+									'<td>'+
+										'<a href="/bendahara/detail/'+ value.id +'" class="table-button-secondary">Detail</a>'+
+										'<a href="/bendahara/edit/'+ value.id +'" class="table-button-success">Edit</a>'+
+										'<button class="table-button-danger" type="button" data-toggle="modal" data-target="#delete-modal" data-id="'+value.id+'" onclick="handleSetId(this)">Hapus</button>'+
+									'</td>'+
+								'</tr>'
+							);
+	
+							const status = $('#status'+index+'').html("");
+							if (value.status === "in") {
+								status.append(
+									'<div class="status-in-column">Pemasukan</div>'
+								);
+							} else if (value.status === "out") {
+								status.append(
+									'<div class="status-out-column">Pengeluaran</div>'
+								);
+							}
+						});
+					}
 
-						const status = $('#status'+index+'').html("");
-						if (value.status === "in") {
-							status.append(
-								'<div class="status-in-column">Pemasukan</div>'
-							);
-						} else if (value.status === "out") {
-							status.append(
-								'<div class="status-out-column">Pengeluaran</div>'
-							);
+					const el = $('#pagination').html("");
+					result.data.links.forEach((value, index) => {
+						if (value.url === null) {
+							el.append(
+								null
+							)
+						} else {
+							if (value.active === true) {
+								el.append(
+									'<span class="pagination active" data-url="'+value.url+'" onclick="handlePagination(this)">'+value.label+'</span>'
+								);
+							} else {
+								if (value.label === "&laquo; Previous") {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)"><i class="fas fa-chevron-left"></i></span>'
+									);
+								} else if (value.label === "Next &raquo;") {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)"><i class="fas fa-chevron-right"></i></span>'
+									);
+								} else {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)">'+value.label+'</span>'
+									);
+								}
+							}
 						}
 					});
 				}
 			});
+		}
+
+		function handlePagination(e) {
+			const url = $(e).data('url');
+			page = url;
+			showTransactionList();
 		}
 
 		function handleSetId(e) {
@@ -150,7 +196,7 @@
 				url: '/api/transaction/delete/' + id,
 				success: function(result) {
 					$('#delete-modal').modal('hide');
-					location.reload(true);
+					$('.modal-backdrop').remove();
 
 					showTransactionList();
 					showTotalMoney();

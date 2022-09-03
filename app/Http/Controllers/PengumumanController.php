@@ -44,7 +44,7 @@ class PengumumanController extends Controller
 
     public function getData()
     {
-        $data = Announ::orderBy('created_at', 'DESC')->get();
+        $data = Announ::orderBy('created_at', 'DESC')->paginate(10);
 
         return response()->json([
             'status'    => 'true',

@@ -64,7 +64,7 @@ class PublikasiController extends Controller
 
     public function getData()
     {
-        $data = Gallery::orderBy("created_at", "DESC")->get();
+        $data = Gallery::orderBy("created_at", "DESC")->paginate(10);
 
         return response()->json([
             'status'    => 'true',

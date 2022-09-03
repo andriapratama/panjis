@@ -57,7 +57,7 @@ class NotulenController extends Controller
 
     public function getData()
     {
-        $data = Note::orderBy('created_at', 'DESC')->get();
+        $data = Note::orderBy('created_at', 'DESC')->paginate(10);
 
         return response()->json([
             'status'    => 'true',

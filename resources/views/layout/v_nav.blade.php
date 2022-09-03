@@ -16,16 +16,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/publikasi" class="nav-link">
-               <i class="nav-icon fas fa-image"></i>
-              <p>Publikasi</p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Sekretaris
+                Agenda
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -46,6 +40,18 @@
                 <a href="/lpj" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>LPJ</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/publikasi" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Publikasi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/absen" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Absen</p>
                 </a>
               </li>
             </ul>
@@ -74,27 +80,10 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Data Keanggotaan
-                <i class="right fas fa-angle-left"></i>
-              </p>
+            <a href="/anggota" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>Data Keanggotaan</p>
             </a>
-            <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="/anggota" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Anggota</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/absen" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Absen</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
             <a href="/admin" class="nav-link">

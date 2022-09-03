@@ -43,6 +43,17 @@ class BarangController extends Controller
 
     public function getData()
     {
+        $data = Product::paginate(10);
+
+        return response()->json([
+            'status'    => 'true',
+            'message'   => 'success to get product data',
+            'data'      => $data
+        ], 200);
+    }
+
+    public function getAllData()
+    {
         $data = Product::get();
 
         return response()->json([

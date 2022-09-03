@@ -18,6 +18,8 @@
             </thead>
             <tbody id="table-body"></tbody>
         </table>
+
+        <div class="pagination-container" id="pagination"></div>
     </div>
 
     <!-- Create Modal -->
@@ -66,6 +68,7 @@
     <script type="text/javascript">
         let title = "";
         let id = null;
+        let page = "/absen/data";
 
         $("document").ready(function() {
             showData();
@@ -96,28 +99,72 @@
         function showData() {
             $.ajax({
                 type: 'GET',
-                url: '/absen/data',
+                url: page,
                 success: function(result) {
                     const element = $('#table-body').html("");
-                    result.data.forEach((value, index) => {
-                        const date = new Date(value.created_at);
-					    const dateFormat = new Intl.DateTimeFormat(['ban', 'id']).format(date);
 
+                    if (result.data.data.length === 0) {
                         element.append(
                             '<tr>'+
-                                '<td>'+ dateFormat +'</td>'+
-                                '<td>'+ value.title +'</td>'+
-                                '<td>'+ value.total +' anggota</td>'+
-                                '<td>'+
-                                    '<a class="table-button-secondary" href="/absen/detail/'+ value.id +'">Open</a>'+
-                                    '<button class="table-button-success" type="button" data-toggle="modal" data-target="#edit-modal" data-id="'+value.id+'" onclick="showDataEdit(this)">Edit Judul</button>'+
-                                '</td>'+
-                            '</tr>'
+								'<td class="empty-data" colSpan="6">Data Kosong</td>'+
+							'</tr>'
                         );
-                    });
+                    } else {
+                        result.data.data.forEach((value, index) => {
+                            const date = new Date(value.created_at);
+                            const dateFormat = new Intl.DateTimeFormat(['ban', 'id']).format(date);
+    
+                            element.append(
+                                '<tr>'+
+                                    '<td>'+ dateFormat +'</td>'+
+                                    '<td>'+ value.title +'</td>'+
+                                    '<td>'+ value.total +' anggota</td>'+
+                                    '<td>'+
+                                        '<a class="table-button-secondary" href="/absen/detail/'+ value.id +'">Open</a>'+
+                                        '<button class="table-button-success" type="button" data-toggle="modal" data-target="#edit-modal" data-id="'+value.id+'" onclick="showDataEdit(this)">Edit Judul</button>'+
+                                    '</td>'+
+                                '</tr>'
+                            );
+                        });
+                    }
+
+                    const el = $('#pagination').html("");
+					result.data.links.forEach((value, index) => {
+						if (value.url === null) {
+							el.append(
+								null
+							)
+						} else {
+							if (value.active === true) {
+								el.append(
+									'<span class="pagination active" data-url="'+value.url+'" onclick="handlePagination(this)">'+value.label+'</span>'
+								);
+							} else {
+								if (value.label === "&laquo; Previous") {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)"><i class="fas fa-chevron-left"></i></span>'
+									);
+								} else if (value.label === "Next &raquo;") {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)"><i class="fas fa-chevron-right"></i></span>'
+									);
+								} else {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)">'+value.label+'</span>'
+									);
+								}
+							}
+						}
+					});
                 }
             });
         }
+
+        function handlePagination(e) {
+			const url = $(e).data('url');
+			page = url;
+			showData();
+		}
 
         function showDataEdit(e) {
             id = $(e).data('id');
@@ -150,6 +197,8 @@
                 processData: false,
                 success: function(result) {
                     $('#edit-modal').modal('hide');
+					$('.modal-backdrop').remove();
+                    
                     showData();
                 }
             });

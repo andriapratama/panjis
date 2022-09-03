@@ -35,12 +35,6 @@ class PeminjamanController extends Controller
     public function print($id)
     {
         return view('v_peminjamanPDF', ['id' => $id]);
-
-        // $dompdf = new Dompdf();
-        // $dompdf->loadHtml($html);
-        // $dompdf->setPaper('A4', 'potrait');
-        // $dompdf->render();
-        // $dompdf->stream();
     }
 
     public function store(Request $request)
@@ -71,7 +65,7 @@ class PeminjamanController extends Controller
 
     public function getData()
     {
-        $data = Loan::orderBy('created_at', 'DESC')->get();
+        $data = Loan::orderBy('created_at', 'DESC')->paginate(10);
 
         return response()->json([
             'status'    => 'true',

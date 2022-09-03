@@ -18,6 +18,8 @@
             </thead>
             <thead id="table-body"></thead>
         </table>
+
+        <div id="pagination" class="pagination-container"></div>
     </div>
 
     <!-- Detail Modal -->
@@ -66,6 +68,7 @@
     @include('js/javascript')
     <script type="text/javascript">
         let id = null;
+        let page = "/announ"
 
         $("document").ready(function() {
             showData();
@@ -74,11 +77,19 @@
         function showData() {
             $.ajax({
                 type: 'GET',
-                url: '/announ',
+                url: page,
                 success: function(result) {
-                    const el = $('#table-body').html("");
-                    result.data.forEach((value, index) => {
-                        el.append(
+                    const element = $('#table-body').html("");
+
+                    if (result.data.data.length === 0) {
+                        element.append(
+                            '<tr>'+
+                                '<td class="empty-data" colSpan="4">Data Kosong</td>'+
+                            '</tr>'
+                        )
+                    }
+                    result.data.data.forEach((value, index) => {
+                        element.append(
                             '<tr>'+
                                 '<td>'+ (index+1) +'</td>'+
                                 '<td>'+ value.title +'</td>'+
@@ -91,9 +102,44 @@
                             '</tr>'
                         );
                     });
+
+                    const el = $('#pagination').html("");
+					result.data.links.forEach((value, index) => {
+						if (value.url === null) {
+							el.append(
+								null
+							)
+						} else {
+							if (value.active === true) {
+								el.append(
+									'<span class="pagination active" data-url="'+value.url+'" onclick="handlePagination(this)">'+value.label+'</span>'
+								);
+							} else {
+								if (value.label === "&laquo; Previous") {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)"><i class="fas fa-chevron-left"></i></span>'
+									);
+								} else if (value.label === "Next &raquo;") {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)"><i class="fas fa-chevron-right"></i></span>'
+									);
+								} else {
+									el.append(
+										'<span class="pagination" data-url="'+value.url+'" onclick="handlePagination(this)">'+value.label+'</span>'
+									);
+								}
+							}
+						}
+					});
                 }
             });
         }
+
+        function handlePagination(e) {
+			const url = $(e).data('url');
+			page = url;
+			showData();
+		}
 
         function handleDetail(e) {
             const id = $(e).data('id');
@@ -121,6 +167,7 @@
                     showData();
 
                     $('#delete-modal').modal('hide');
+					$('.modal-backdrop').remove();
                 }
             });
         }

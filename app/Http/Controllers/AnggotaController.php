@@ -50,7 +50,7 @@ class AnggotaController extends Controller
 
 	public function getData()
 	{
-		$data = Member::orderBy('created_at', 'DESC')->get();
+		$data = Member::orderBy('created_at', 'DESC')->paginate(10);
 
 		return response()->json([
 			'status'	=> 'true',

@@ -131,7 +131,7 @@
         function showProduct(index, id) {
             $.ajax({
                 type: 'GET',
-                url: '/product',
+                url: '/product/all',
                 success: function(result) {
                     const element = $('#select-product'+index+'').html("");
                     element.append(
