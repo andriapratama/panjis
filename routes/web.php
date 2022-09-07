@@ -25,6 +25,10 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/page/gallery', [IndexController::class, 'gallery']);
+Route::get('/page/gallery/detail/{id}', [IndexController::class, 'galleryDetail']);
+Route::get('/client/gallery', [IndexController::class, 'getGallery']);
+Route::get('/client/gallery/{id}', [IndexController::class, 'getOneGallery']);
 
 Auth::routes();
 

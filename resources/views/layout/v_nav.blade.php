@@ -105,30 +105,6 @@
               <p>Bendahara</p>
             </a>
           </li>
-      @elseif(auth()->user()->level==4)
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Data Keanggotaan
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/pengurus" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pengurus</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/anggota" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Anggota</p>
-                </a>
-              </li>
-            </ul>
-          </li>
       @elseif(auth()->user()->level==5)
           <li class="nav-item">
             <a href="/pengembangan" class="nav-link">

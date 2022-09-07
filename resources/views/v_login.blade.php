@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Panji Saraswati | Log in</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+  <title>Log in</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="{{asset('template/')}}/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -14,53 +15,39 @@
   <link rel="stylesheet" href="{{asset('template/')}}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('template/')}}/dist/css/adminlte.min.css">
+
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Panji</b>Saraswati</a>
+    <h1>Panji Saraswati</h1>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Silakan Login</p>
 
-      <form method="POST" action="{{ route('login') }}">
-        @csrf
-        <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-              @error('username')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-              @enderror
-            </div>
-          </div>
+      <div class="error" id="response-error" style="width: 100%; text-align: center; margin-bottom: 10px;"></div>
+
+        <div style="width: 100%; margin-bottom: 10px;">
+          <input type="email" name="email" class="form-control" placeholder="Email" onkeyup="handleEmail(this)">
+          <div class="error" id="error-email"></div>
         </div>
-        <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-              @error('password')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-              @enderror
-            </div>
-          </div>
+        <div style="width: 100%; margin-bottom: 10px;">
+          <input type="password" name="password" class="form-control" placeholder="Password" onkeyup="handlePassword(this)">
+          <div class="error" id="error-password"></div>
         </div>
           <!-- /.col -->
           <div class="">
-            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+            <button class="btn btn-primary btn-block" onclick="handleLogin()">Masuk</button>
           </div>
           <!-- /.col -->
         </div>
-      </form>
 
+      <p class="text-center" style="margin-bottom: 20px;">
+        <a href="{{ route('register') }}" class="text-center">Register</a>
+      </p>
       <!-- /.social-auth-links -->
     </div>
     <!-- /.login-card-body -->
@@ -75,4 +62,81 @@
 <!-- AdminLTE App -->
 <script src="{{asset('template/')}}/dist/js/adminlte.min.js"></script>
 </body>
+
+@include('js/javascript')
+<script type="text/javascript">
+  let email = {value: "", error: false};
+  let password = {value: "", error: false};
+
+  $(document).on('keyup',function(e) {
+      if(e.which == 13) {
+          handleLogin();
+      }
+  });
+
+  function handleEmail(e) {
+    email.value = $(e).val();
+    email.error = false;
+
+    $('#error-email').html("");
+  }
+
+  function handlePassword(e) {
+    password.value = $(e).val();
+    password.error = false;
+
+    $('#error-password').html("");
+  }
+
+  function handleLogin() {
+    const elEmail = $('#error-email');
+    const elPassword = $('#error-password');
+
+    if (email.value.length === 0) {
+      elEmail.html("Email tidak boleh kosong");
+      email.error = true;
+    } else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
+      elEmail.html("");
+      email.error = false;
+    } else {
+      elEmail.html("Email tidak valid");
+      email.error = true;
+    }
+
+    if (password.value.length === 0) {
+      elPassword.html("Password tidak boleh kosong");
+      password.error = true;
+    } else if (password.value.length < 8) {
+      elPassword.html("Password minimal 8 karakter");
+      password.error = true;
+    }
+
+    if (email.error === false && password.error === false) {
+      postData();
+    }
+  }
+
+  function postData() {
+    const formData = new FormData();
+    formData.append('email', email.value);
+    formData.append('password', password.value);
+
+    $.ajax({
+      type: "POST",
+      url: '/login',
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function(result) {
+        window.location.href = "/home";
+      },
+      error: function(error) {
+        $('#response-error').html(error.responseJSON.message);
+      }
+    });
+  }
+</script>
 </html>

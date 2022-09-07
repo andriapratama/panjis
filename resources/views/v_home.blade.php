@@ -10,7 +10,7 @@
 						<h4 class="home__title">Jumlah Transaksi</h4>
 						<h2 style="margin-bottom: 0;" id="transaction"></h2>
 					</div>
-					<i class="nav-icon fas fa-user"></i>
+					<i class="fas fa-clipboard-list"></i>
 				</div>
 				<div class="home__card">
 					<div class="home__card-left">
@@ -24,28 +24,28 @@
 						<h4>Jumlah Publikasi</h4>
 						<h2 style="margin-bottom: 0;" id="gallery"></h2>
 					</div>
-					<i class="nav-icon fas fa-user"></i>
+					<i class="fas fa-images"></i>
 				</div>
 				<div class="home__card">
 					<div class="home__card-left">
 						<h4>Jumlah LPJ</h4>
 						<h2 style="margin-bottom: 0;" id="report"></h2>
 					</div>
-					<i class="nav-icon fas fa-user"></i>
+					<i class="fas fa-file"></i>
 				</div>
 				<div class="home__card">
 					<div class="home__card-left">
 						<h4>Jumlah Notulen</h4>
 						<h2 style="margin-bottom: 0;" id="note"></h2>
 					</div>
-					<i class="nav-icon fas fa-user"></i>
+					<i class="fas fa-book-open"></i>
 				</div>
 				<div class="home__card">
 					<div class="home__card-left">
 						<h4>Jumlah Member</h4>
 						<h2 style="margin-bottom: 0;" id="member"></h2>
 					</div>
-					<i class="nav-icon fas fa-user"></i>
+					<i class="nav-icon fas fa-users"></i>
 				</div>
 			</div>
 		</div>

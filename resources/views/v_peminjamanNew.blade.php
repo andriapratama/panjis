@@ -345,6 +345,11 @@
                     '<span class="error">Tanggal akhir harus diisi</span>'
                 );
                 endDate.error = true;
+            } else if (endDate.value < startDate.value) {
+                endDateEl.append(
+                    '<span class="error">Tanggal akhir tidak boleh kurang dari tanggal awal</span>'
+                );
+                endDate.error = true;
             }
 
             transactionList.forEach((value, index) => {

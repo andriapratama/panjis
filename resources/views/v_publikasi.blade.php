@@ -24,7 +24,7 @@
 	@include('js/javascript')
 	<script type="text/javascript">
 		let page = "/gallery";
-
+		
 		$("document").ready(function() {
 			showData();
 		});

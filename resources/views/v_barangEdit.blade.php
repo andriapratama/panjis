@@ -47,7 +47,6 @@
                 type: 'GET',
                 url: '/product/' + id,
                 success: function(result) {
-                    console.log(result);
                     const data = result.data;
                     name.value = data.name;
                     quantity.value = data.quantity;
